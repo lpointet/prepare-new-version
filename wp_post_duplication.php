@@ -67,7 +67,7 @@ if( !class_exists( 'WPPD' ) ) {
         /**
          * Return the posts corresponding to duplicatas for the given post ID
          */
-        public static function get_duplicata( $post_id = NULL, $id = FALSE ) {
+        public static function get_duplicata( $post_id = NULL, $id = TRUE ) {
             global $post;
 
             $post_id = $post_id ? $post_id : $post->ID;
@@ -92,13 +92,28 @@ if( !class_exists( 'WPPD' ) ) {
         }
 
         /**
+         * Return the post ID which is the original for a given post.
+         * It returns:
+         *  - an empty string if not defined
+         *  - 0 if the post is current year
+         *  - post ID if there is a parent
+         */
+        public static function get_original( $post_id = NULL ) {
+            global $post;
+
+            $post_id = $post_id ? $post_id : $post->ID;
+
+            return get_post_meta( $post_id, WPPD_META_NAME, TRUE );
+        }
+
+        /**
          * Remove duplicatas when an original post is deleted
          */
         public function delete_post( $post_id ) {
             $post = get_post( $post_id );
             $post_type = WPPD_Option::get_post_types();
 
-            if( !in_array( $post->post_type, $post_type ) || !( $duplicata = self::get_duplicata( $post_id, TRUE ) ) || !empty( $REQUEST['delete_all'] ) )
+            if( !in_array( $post->post_type, $post_type ) || !( $duplicata = self::get_duplicata( $post_id ) ) || !empty( $REQUEST['delete_all'] ) )
                 return;
 
             if( !empty( $_REQUEST['ids'] ) ) {

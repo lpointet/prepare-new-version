@@ -12,3 +12,4 @@ define( 'WPPD_STR_ERASE_BUTTON', __( 'Replace with this one', WPPD_DOMAIN ) );
 define( 'WPPD_STR_DUPLICATE_BUTTON', __( 'Duplicate', WPPD_DOMAIN ) );
 define( 'WPPD_STR_COPY_BUTTON', __( 'Create a copy', WPPD_DOMAIN ) );
 define( 'WPPD_STR_PUBLISH_META_BOX_TITLE', __( 'Publish', WPPD_DOMAIN ) );
+define( 'WPPD_STR_SAVE_DUPLICATA_BUTTON', __( 'Save duplicata', WPPD_DOMAIN ) );

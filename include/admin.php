@@ -52,6 +52,9 @@ class WPPD_Admin {
             'action' => 'edit',
         ), admin_url( '/post.php' ) );
 
+        if( !( $url = apply_filters( 'wppd_action_url_redirect', $url, $post_id ) ) )
+            return;
+
         wp_safe_redirect($url);
         exit;
     }
@@ -106,11 +109,15 @@ class WPPD_Admin {
      * Display data for added columns
      */
     public static function manage_posts_custom_column( $column, $post_id ) {
-        switch($column) {
+        $val = '';
+
+        switch( $column ) {
             case 'duplicata':
                 $duplicata = WPPD::get_duplicata( $post_id );
-                echo count( $duplicata );
+                $val = count( $duplicata );
                 break;
         }
+
+        echo apply_filters( 'wppd_' . $column . '_column_value', $val, $post_id );
     }
 }

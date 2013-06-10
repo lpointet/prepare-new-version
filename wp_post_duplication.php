@@ -76,6 +76,9 @@ if( !class_exists( 'WPPD' ) ) {
                 'show_in_admin_all_list' => FALSE,
                 'label_count' => _n_noop( WPPD_STR_DUPLICATA_STATUS_LABEL_COUNT_SINGULAR, WPPD_STR_DUPLICATA_STATUS_LABEL_COUNT_PLURAL, WPPD_DOMAIN ),
             );
+
+            $args = apply_filters( 'wppd_duplicata_status_args', $args );
+
             register_post_status( WPPD_STATUS_NAME, $args );
         }
 
@@ -190,6 +193,8 @@ if( !class_exists( 'WPPD' ) ) {
                 $destination[$field] = $source->$field;
             }
 
+            $destination = apply_filters( 'wppd_erase_content_destincation', $destination, $source, $copy );
+
             $post_id = wp_insert_post( $destination );
 
             if( !$post_id )
@@ -216,8 +221,6 @@ if( !class_exists( 'WPPD' ) ) {
                 update_post_meta( $post_id, $key, $val );
             }
 
-            do_action( 'wppd_erase_content', $source, $destination, $post_id );
-
             if( '' === self::get_original( $post_id ) ) {
                 $val = $copy ? '0' : $source->ID;
 
@@ -227,6 +230,8 @@ if( !class_exists( 'WPPD' ) ) {
 
                 update_post_meta( $post_id, WPPD_META_NAME, $val );
             }
+
+            do_action( 'wppd_erase_content', $source, $destination, $copy, $post_id );
 
             return $post_id;
         }
@@ -238,6 +243,8 @@ if( !class_exists( 'WPPD' ) ) {
             $meta = array(
                 WPPD_META_NAME => TRUE,
             );
+
+            $meta = apply_filters( 'wppd_filtered_metas', $meta );
 
             return isset($meta[$key]);
         }

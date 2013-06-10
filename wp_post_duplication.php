@@ -193,7 +193,7 @@ if( !class_exists( 'WPPD' ) ) {
                 $destination[$field] = $source->$field;
             }
 
-            $destination = apply_filters( 'wppd_erase_content_destincation', $destination, $source, $copy );
+            $destination = apply_filters( 'wppd_erase_content_destination', $destination, $source, $copy );
 
             $post_id = wp_insert_post( $destination );
 

@@ -9,7 +9,13 @@ class WPPD_Option {
      */
     public static function get_post_types() {
         // @TODO: get the list of post types saved in admin
-        return get_post_types();
+        $post_type = get_post_types();
+
+        // Remove medias from supported post types
+        if( $index = array_search( 'attachment', $post_type ) )
+            unset( $post_type[$index] );
+
+        return $post_type;
     }
 
     /**

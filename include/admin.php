@@ -13,6 +13,13 @@ class WPPD_Admin {
      */
     public static function admin_init() {
         self::handle_action();
+
+        // Add other hooks
+        $post_type = WPPD_Option::get_post_types();
+        foreach( $post_type as $type ) {
+            add_action( 'manage_' . $type . '_posts_columns', array( __CLASS__, 'manage_posts_columns' ) );
+            add_action( 'manage_' . $type . '_posts_custom_column', array( __CLASS__, 'manage_posts_custom_column' ), 10, 2 );
+        }
     }
 
     /**
@@ -39,4 +46,22 @@ class WPPD_Admin {
         require WPPD_COMPLETE_PATH . '/template/duplicata_meta_box.php';
     }
 
+    /**
+     * Add columns to the post types lists
+     */
+    public static function manage_posts_columns( $columns ) {
+        return $columns + array('duplicata' => WPPD_STR_DUPLICATA_COLUMN_TITLE);
+    }
+
+    /**
+     * Display data for added columns
+     */
+    public static function manage_posts_custom_column( $column, $post_id ) {
+        switch($column) {
+            case 'duplicata':
+                $duplicata = WPPD::get_duplicata( $post_id );
+                echo count( $duplicata );
+                break;
+        }
+    }
 }

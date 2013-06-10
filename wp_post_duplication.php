@@ -65,12 +65,28 @@ if( !class_exists( 'WPPD' ) ) {
         }
 
         /**
+         * Return TRUE if the post is a duplicata, FALSE otherwise
+         */
+        public static function is_duplicata( $post_id = NULL ) {
+            if( !$post_id ) {
+                $post = get_post();
+                $post_id = $post->ID;
+            }
+
+            $post = get_post( $post_id );
+
+            return WPPD_STATUS_NAME === $post->post_status;
+        }
+
+        /**
          * Return the posts corresponding to duplicatas for the given post ID
          */
         public static function get_duplicata( $post_id = NULL, $id = TRUE ) {
-            global $post;
+            if( !$post_id ) {
+                $post = get_post();
+                $post_id = $post->ID;
+            }
 
-            $post_id = $post_id ? $post_id : $post->ID;
             $post_type = WPPD_Option::get_post_types();
 
             $posts = get_posts(array(
@@ -99,9 +115,10 @@ if( !class_exists( 'WPPD' ) ) {
          *  - post ID if there is a parent
          */
         public static function get_original( $post_id = NULL ) {
-            global $post;
-
-            $post_id = $post_id ? $post_id : $post->ID;
+            if( !$post_id ) {
+                $post = get_post();
+                $post_id = $post->ID;
+            }
 
             return get_post_meta( $post_id, WPPD_META_NAME, TRUE );
         }

@@ -74,7 +74,7 @@ if( !class_exists( 'WPPD' ) ) {
                 'public' => FALSE,
                 'exclude_from_search' => TRUE,
                 'show_in_admin_all_list' => FALSE,
-                'label_count' => _n_noop( WPPD_STR_DUPLICATA_STATUS_LABEL_COUNT_SINGULAR, WPPD_STR_DUPLICATA_STATUS_LABEL_COUNT_PLURAL, WPPD_DOMAIN ),
+                'label_count' => _n_noop( 'Duplicate <span class="count">(%s)</span>', 'Duplicates <span class="count">(%s)</span>', WPPD_DOMAIN ),
             );
 
             $args = apply_filters( 'wppd_duplicata_status_args', $args );

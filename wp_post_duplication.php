@@ -143,5 +143,88 @@ if( !class_exists( 'WPPD' ) ) {
             foreach( $duplicata as $id )
                 wp_delete_post( $duplicata );
         }
+
+        /**
+         * Erase a post content with the one of another
+         * If destination is not set, will create a duplicata of source
+         * If copy is set to true, just create a copy of the post (no duplicata)
+         */
+        public static function erase_content( $source, $destination = NULL, $copy = FALSE ) {
+            $default_post = array(
+                'ID' => '',
+                'comment_status' => 'closed',
+                'ping_status' => 'closed',
+                'post_author' => '',
+                'post_content' => '',
+                'post_date' => '',
+                'post_date_gmt' => '',
+                'post_excerpt' => '',
+                'post_parent' => '',
+                'post_status' => 'duplicata',
+                'post_title' => '',
+                'post_type' => 'post',
+            );
+
+            $destination = wp_parse_args( (array) $destination, $default_post );
+
+            // Fill in the values from source
+            foreach( array_keys( $destination ) as $field ) {
+                if( 'ID' === $field || 'guid' === $field || 'post_name' === $field || 'ancestors' === $field || ( 'post_status' === $field && !$copy )  )
+                    continue;
+
+                $destination[$field] = $source->$field;
+            }
+
+            $post_id = wp_insert_post( $destination );
+
+            if( !$post_id )
+                return;
+
+            // Add terms
+            $taxonomies = WPPD_Option::get_object_taxonomies( $source->post_type );
+            foreach( $taxonomies as $taxonomy ) {
+                $tax_terms = array();
+                $terms = get_the_terms( $source->ID, $taxonomy );
+                foreach( $terms as $term )
+                    $tax_terms[] = $term->slug;
+                wp_set_object_terms( $post_id, $tax_terms, $taxonomy );
+            }
+
+            // Add metadatas
+            $meta = get_post_meta( $source->ID );
+            foreach( $meta as $key => $val ) {
+                if( self::is_filtered_meta( $key ) )
+                    continue;
+
+                $val = count( $val ) > 1 ? array_map( 'maybe_unserialize', $val ) : maybe_unserialize( $val[0] );
+
+                update_post_meta( $post_id, $key, $val );
+            }
+
+            do_action( 'wppd_erase_content', $source, $destination, $post_id );
+
+            if( '' === self::get_original( $post_id ) ) {
+                $val = $copy ? '0' : $source->ID;
+
+                // Don't link to a duplicata
+                if( self::is_duplicata( $source->ID ) )
+                    $val = self::get_original( $source->ID );
+
+                update_post_meta( $post_id, WPPD_META_NAME, $val );
+            }
+
+            return $post_id;
+        }
+
+        /**
+         * Return TRUE or FALSE whether a meta should be erased: TRUE = it shouldn't, FALSE = it should
+         */
+        public static function is_filtered_meta($key) {
+            $meta = array(
+                WPPD_META_NAME => TRUE,
+            );
+
+            return isset($meta[$key]);
+        }
     }
 }

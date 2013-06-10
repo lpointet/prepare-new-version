@@ -40,28 +40,43 @@ if( !class_exists( 'WPPD' ) ) {
             register_deactivation_hook( __FILE__, array( __CLASS__, 'deactivate' ) );
             register_uninstall_hook( __FILE__, array( __CLASS__, 'uninstall' ) );
 
+            add_action( 'init', array( __CLASS__, 'init' ) );
             add_action( 'delete_post', array( __CLASS__, 'delete_post' ) );
         }
 
         /**
          * What to do on plugin activation
          */
-        public static function activate(){
+        public static function activate() {
             // Nothing for now.
         }
 
         /**
          * What to do on plugin deactivation
          */
-        public static function deactivate(){
+        public static function deactivate() {
             // Nothing for now.
         }
 
         /**
          * What to do on plugin uninstallation
          */
-        public static function uninstall(){
+        public static function uninstall() {
             // Nothing for now.
+        }
+
+        /**
+         * Plugin init: create 'duplicata' status
+         */
+        public static function init() {
+            $args = array(
+                'label' => WPPD_STR_DUPLICATA_STATUS_LABEL,
+                'public' => FALSE,
+                'exclude_from_search' => TRUE,
+                'show_in_admin_all_list' => FALSE,
+                'label_count' => _n_noop( WPPD_STR_DUPLICATA_STATUS_LABEL_COUNT_SINGULAR, WPPD_STR_DUPLICATA_STATUS_LABEL_COUNT_PLURAL, WPPD_DOMAIN ),
+            );
+            register_post_status( WPPD_STATUS_NAME, $args );
         }
 
         /**
@@ -227,4 +242,5 @@ if( !class_exists( 'WPPD' ) ) {
             return isset($meta[$key]);
         }
     }
+    WPPD::hooks();
 }

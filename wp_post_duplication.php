@@ -39,6 +39,8 @@ if( !class_exists( 'WPPD' ) ) {
             register_activation_hook( __FILE__, array( __CLASS__, 'activate' ) );
             register_deactivation_hook( __FILE__, array( __CLASS__, 'deactivate' ) );
             register_uninstall_hook( __FILE__, array( __CLASS__, 'uninstall' ) );
+
+            add_action( 'delete_post', array( __CLASS__, 'delete_post' ) );
         }
 
         /**
@@ -60,6 +62,54 @@ if( !class_exists( 'WPPD' ) ) {
          */
         public static function uninstall(){
             // Nothing for now.
+        }
+
+        /**
+         * Return the posts corresponding to duplicatas for the given post ID
+         */
+        public static function get_duplicata( $post_id = NULL, $id = FALSE ) {
+            global $post;
+
+            $post_id = $post_id ? $post_id : $post->ID;
+            $post_type = WPPD_Option::get_post_types();
+
+            $posts = get_posts(array(
+                'post_type' => $post_type,
+                'suppress_filters' => FALSE,
+                'posts_per_page' => -1,
+                'meta_query' => array(
+                    array(
+                        'key' => WPPD_META_NAME,
+                        'value' => $post_id,
+                        'type' => 'NUMERIC',
+                    ),
+                ),
+                'post_status' => WPPD_STATUS_NAME,
+                'fields' => ($id ? 'ids' : ''),
+            ));
+
+            return $posts;
+        }
+
+        /**
+         * Remove duplicatas when an original post is deleted
+         */
+        public function delete_post( $post_id ) {
+            $post = get_post( $post_id );
+            $post_type = WPPD_Option::get_post_types();
+
+            if( !in_array( $post->post_type, $post_type ) || !( $duplicata = self::get_duplicata( $post_id, TRUE ) ) || !empty( $REQUEST['delete_all'] ) )
+                return;
+
+            if( !empty( $_REQUEST['ids'] ) ) {
+                $duplicata = array_diff( $duplicata, $_REQUEST['ids'] );
+            }
+
+            if( empty( $duplicata ) )
+                return;
+
+            foreach( $duplicata as $id )
+                wp_delete_post( $duplicata );
         }
     }
 }

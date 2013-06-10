@@ -62,6 +62,14 @@ class WPPD_Admin {
     public static function add_meta_boxes() {
         $post_type = WPPD_Option::get_post_types();
 
+        // If we are on a duplicata, remove default submit meta box and replace it with our box
+        $current_screen = get_current_screen();
+        $post = get_post();
+        if( in_array( $current_screen->post_type, $post_type ) && WPPD::is_duplicata( $post->ID ) ) {
+            remove_meta_box( 'submitdiv', $current_screen->post_type, 'side' );
+            add_meta_box( 'wppd_submit_meta_box', WPPD_STR_PUBLISH_META_BOX_TITLE, array( __CLASS__, 'submit_meta_box' ), $current_screen->post_type, 'side', 'core' );
+        }
+
         foreach( $post_type as $type )
             add_meta_box( 'wppd_duplicata_meta_box', WPPD_STR_DUPLICATA_META_BOX_TITLE, array( __CLASS__, 'duplicata_meta_box' ), $type, 'side', 'core' );
     }
@@ -71,6 +79,13 @@ class WPPD_Admin {
      */
     public static function duplicata_meta_box() {
         require WPPD_COMPLETE_PATH . '/template/duplicata_meta_box.php';
+    }
+
+    /**
+     * Display publish meta box
+     */
+    public static function submit_meta_box() {
+        require WPPD_COMPLETE_PATH . '/template/submit_meta_box.php';
     }
 
     /**

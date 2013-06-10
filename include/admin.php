@@ -26,7 +26,34 @@ class WPPD_Admin {
      * Handle duplicata / copy creation
      */
     public static function handle_action() {
-        // @TODO: handle duplication actions
+        if( !isset( $_GET[WPPD_ACTION_NAME] ) || !isset( $_GET['ID'] ) || !check_admin_referer( WPPD_ACTION_NONCE ) )
+            return;
+
+        $source = get_post( $_GET['ID'] );
+
+        switch( $_GET[WPPD_ACTION_NAME] ) {
+            case WPPD_DUPLICATE_ACTION:
+                $post_id = WPPD::erase_content( $source );
+                break;
+            case WPPD_COPY_ACTION:
+                $post_id = WPPD::erase_content( $source, NULL, TRUE );
+                break;
+            case WPPD_ERASE_ACTION:
+                $destination = get_post( WPPD::get_original( $_GET['ID'] ) );
+                $post_id = WPPD::erase_content( $source, $destination, TRUE );
+                break;
+        }
+
+        if( !isset( $post_id ) || empty( $post_id ) )
+            return;
+
+        $url = add_query_arg( array(
+            'post' => $post_id,
+            'action' => 'edit',
+        ), admin_url( '/post.php' ) );
+
+        wp_safe_redirect($url);
+        exit;
     }
 
     /**

@@ -50,6 +50,13 @@ class WPPD_Admin {
      * Add columns to the post types lists
      */
     public static function manage_posts_columns( $columns ) {
+        $current_screen = get_current_screen();
+        $post_type_obj = get_post_type_object( $current_screen->post_type );
+
+        // If we cannot create posts of that type, we cannot see duplicatas
+        if( !current_user_can( $post_type_obj->cap->edit_posts ) )
+            return $columns;
+
         return $columns + array('duplicata' => WPPD_STR_DUPLICATA_COLUMN_TITLE);
     }
 

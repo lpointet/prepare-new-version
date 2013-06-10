@@ -12,7 +12,7 @@ else
 <p>
     <?php if( !empty( $original ) ): ?>
         <?php echo sprintf( WPPD_STR_ORIGINAL_POST . '<a href="%s">%s</a>', add_query_arg( array( 'post' => $original, 'action' => 'edit' ), admin_url( 'post.php' ) ), get_the_title( $original ) ); ?>
-        <a href="<?php echo add_query_arg( WPPD_ERASE_ACTION, 1, $action_url ); ?>" id="erase" class="button button-primary button-large"><?php echo WPPD_STR_ERASE_BUTTON; ?></a>
+        <a href="<?php echo add_query_arg( WPPD_ACTION_NAME, WPPD_ERASE_ACTION, $action_url ); ?>" id="erase" class="button button-primary button-large"><?php echo WPPD_STR_ERASE_BUTTON; ?></a>
     <?php else: ?>
         <?php echo WPPD_STR_CURRENT_ORIGINAL_POST; ?>
     <?php endif; ?>
@@ -28,6 +28,6 @@ else
     <?php endforeach; ?>
 </ul>
 <p>
-    <a href="<?php echo add_query_arg( WPPD_DUPLICATE_ACTION, 1, $action_url ); ?>" id="duplicate" class="button button-primary button-large"><?php echo WPPD_STR_DUPLICATE_BUTTON; ?></a>
-    <a href="<?php echo add_query_arg( WPPD_COPY_ACTION, 1 , $action_url ); ?>" id="copy" class="button button-primary button-large"><?php echo WPPD_STR_COPY_BUTTON; ?></a>
+    <a href="<?php echo add_query_arg( WPPD_ACTION_NAME, WPPD_DUPLICATE_ACTION, $action_url ); ?>" id="duplicate" class="button button-primary button-large"><?php echo WPPD_STR_DUPLICATE_BUTTON; ?></a>
+    <a href="<?php echo add_query_arg( WPPD_ACTION_NAME, WPPD_COPY_ACTION , $action_url ); ?>" id="copy" class="button button-primary button-large"><?php echo WPPD_STR_COPY_BUTTON; ?></a>
 </p>

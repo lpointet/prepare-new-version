@@ -24,6 +24,7 @@ define( 'WPPD_STATUS_NAME', 'duplicata' );
 /**
  * Actions
  */
-define( 'WPPD_DUPLICATE_ACTION', 'wppd_duplicate' );
-define( 'WPPD_COPY_ACTION', 'wppd_copy' );
-define( 'WPPD_ERASE_ACTION', 'wppd_erase' );
+define( 'WPPD_ACTION_NAME', 'wppd_action' );
+define( 'WPPD_DUPLICATE_ACTION', 'duplicate' );
+define( 'WPPD_COPY_ACTION', 'copy' );
+define( 'WPPD_ERASE_ACTION', 'erase' );

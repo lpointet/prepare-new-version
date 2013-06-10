@@ -4,7 +4,7 @@ $original = WPPD::get_original();
 $action_url = add_query_arg( array( 'post_type' => $post->post_type, 'ID' => $post->ID ), admin_url( '/edit.php' ) );
 
 if( !empty( $original ) ) {
-    $original = get_post( $original );
+    $duplicata = WPPD::get_duplicata( $original );
 }
 else
     $duplicata = WPPD::get_duplicata();

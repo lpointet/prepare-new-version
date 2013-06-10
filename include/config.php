@@ -20,3 +20,10 @@ define( 'WPPD_META_NAME', '_wppd_duplicata' );
  * Name of the status saved with duplicatas
  */
 define( 'WPPD_STATUS_NAME', 'duplicata' );
+
+/**
+ * Actions
+ */
+define( 'WPPD_DUPLICATE_ACTION', 'wppd_duplicate' );
+define( 'WPPD_COPY_ACTION', 'wppd_copy' );
+define( 'WPPD_ERASE_ACTION', 'wppd_erase' );

@@ -25,7 +25,7 @@ class WPPD_Admin {
     /**
      * Add meta box with links to duplicatas
      */
-    public function add_meta_boxes() {
+    public static function add_meta_boxes() {
         $post_type = WPPD_Option::get_post_types();
 
         foreach( $post_type as $type )
@@ -35,7 +35,7 @@ class WPPD_Admin {
     /**
      * Display duplicata meta box
      */
-    public function duplicata_meta_box() {
+    public static function duplicata_meta_box() {
         require WPPD_COMPLETE_PATH . '/template/duplicata_meta_box.php';
     }
 

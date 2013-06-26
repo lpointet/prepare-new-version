@@ -181,6 +181,7 @@ if( !class_exists( 'WPPD' ) ) {
                 'post_status' => 'duplicata',
                 'post_title' => '',
                 'post_type' => 'post',
+                'menu_order' => 0,
             );
 
             // Erase status only if we are doing a real "copy" : if $destination is not null, this is an "erase" action

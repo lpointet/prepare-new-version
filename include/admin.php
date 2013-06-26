@@ -36,11 +36,13 @@ class WPPD_Admin {
                 $post_id = WPPD::erase_content( $source );
                 break;
             case WPPD_COPY_ACTION:
-                $post_id = WPPD::erase_content( $source, NULL, TRUE );
+                // Copy status is "draft"
+                $source->post_status = 'draft';
+                $post_id = WPPD::erase_content( $source, NULL, FALSE );
                 break;
             case WPPD_ERASE_ACTION:
                 $destination = get_post( WPPD::get_original( $_GET['ID'] ) );
-                $post_id = WPPD::erase_content( $source, $destination, TRUE );
+                $post_id = WPPD::erase_content( $source, $destination, FALSE );
                 break;
         }
 

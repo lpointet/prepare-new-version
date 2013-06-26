@@ -165,9 +165,9 @@ if( !class_exists( 'WPPD' ) ) {
         /**
          * Erase a post content with the one of another
          * If destination is not set, will create a duplicata of source
-         * If copy is set to true, just create a copy of the post (no duplicata)
+         * If duplicate is set to false, just create a copy of the post (no duplicate)
          */
-        public static function erase_content( $source, $destination = NULL, $copy = FALSE ) {
+        public static function erase_content( $source, $destination = NULL, $duplicate = TRUE ) {
             $default_post = array(
                 'ID' => '',
                 'comment_status' => 'closed',
@@ -183,17 +183,20 @@ if( !class_exists( 'WPPD' ) ) {
                 'post_type' => 'post',
             );
 
+            // Erase status only if we are doing a real "copy" : if $destination is not null, this is an "erase" action
+            $erase_status = !$destination && !$duplicate;
+
             $destination = wp_parse_args( (array) $destination, $default_post );
 
             // Fill in the values from source
             foreach( array_keys( $destination ) as $field ) {
-                if( 'ID' === $field || 'guid' === $field || 'post_name' === $field || 'ancestors' === $field || ( 'post_status' === $field && !$copy )  )
+                if( 'ID' === $field || 'guid' === $field || 'post_name' === $field || 'ancestors' === $field || ( 'post_status' === $field && !$erase_status ) )
                     continue;
 
                 $destination[$field] = $source->$field;
             }
 
-            $destination = apply_filters( 'wppd_erase_content_destination', $destination, $source, $copy );
+            $destination = apply_filters( 'wppd_erase_content_destination', $destination, $source, $duplicate );
 
             $post_id = wp_insert_post( $destination );
 
@@ -222,7 +225,7 @@ if( !class_exists( 'WPPD' ) ) {
             }
 
             if( '' === self::get_original( $post_id ) ) {
-                $val = $copy ? '0' : $source->ID;
+                $val = $duplicate ? $source->ID : '0';
 
                 // Don't link to a duplicata
                 if( $val && self::is_duplicata( $source->ID ) )
@@ -231,7 +234,7 @@ if( !class_exists( 'WPPD' ) ) {
                 update_post_meta( $post_id, WPPD_META_NAME, $val );
             }
 
-            do_action( 'wppd_erase_content', $source, $destination, $copy, $post_id );
+            do_action( 'wppd_erase_content', $source, $destination, $duplicate, $post_id );
 
             return $post_id;
         }

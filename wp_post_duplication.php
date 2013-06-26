@@ -225,7 +225,7 @@ if( !class_exists( 'WPPD' ) ) {
                 $val = $copy ? '0' : $source->ID;
 
                 // Don't link to a duplicata
-                if( self::is_duplicata( $source->ID ) )
+                if( $val && self::is_duplicata( $source->ID ) )
                     $val = self::get_original( $source->ID );
 
                 update_post_meta( $post_id, WPPD_META_NAME, $val );

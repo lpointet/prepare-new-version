@@ -26,7 +26,7 @@ else
 <ul>
     <?php foreach( $duplicata as $dup ): ?>
         <li>
-            <a href="<?php echo add_query_arg( array( 'post' => $dup, 'action' => 'edit' ), admin_url( 'post.php' ) ); ?>" <?php echo get_the_ID() == $dup ? 'class="current"' : ''; ?>><?php echo get_the_title( $dup ); ?></a>
+            <a href="<?php echo add_query_arg( array( 'post' => $dup, 'action' => 'edit' ), admin_url( 'post.php' ) ); ?>" <?php echo get_the_ID() == $dup ? 'class="current"' : ''; ?>><?php echo get_the_title( $dup ) . ' - ' . get_the_time( get_option('date_format'), $dup ) . ' - ' . get_the_time( '', $dup ); ?></a>
         </li>
     <?php endforeach; ?>
 </ul>

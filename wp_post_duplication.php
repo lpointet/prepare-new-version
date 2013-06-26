@@ -167,7 +167,7 @@ if( !class_exists( 'WPPD' ) ) {
          * If destination is not set, will create a duplicata of source
          * If duplicate is set to false, just create a copy of the post (no duplicate)
          */
-        public static function erase_content( $source, $destination = NULL, $duplicate = TRUE ) {
+        public static function erase_content( $source, $destination = NULL, $action = WPPD_DUPLICATE_ACTION ) {
             $default_post = array(
                 'ID' => '',
                 'comment_status' => 'closed',
@@ -184,14 +184,21 @@ if( !class_exists( 'WPPD' ) ) {
                 'menu_order' => 0,
             );
 
-            // Erase status only if we are doing a real "copy" : if $destination is not null, this is an "erase" action
-            $erase_status = !$destination && !$duplicate;
-
             $destination = wp_parse_args( (array) $destination, $default_post );
 
             // Fill in the values from source
             foreach( array_keys( $destination ) as $field ) {
-                if( 'ID' === $field || 'guid' === $field || 'post_name' === $field || 'ancestors' === $field || ( 'post_status' === $field && !$erase_status ) )
+                if(
+                    'ID' === $field ||
+                    'guid' === $field ||
+                    'post_name' === $field ||
+                    'ancestors' === $field ||
+                    'post_date' === $field ||
+                    'post_date_gmt' === $field ||
+
+                    // Erase status only if we are doing a real "copy"
+                    ( 'post_status' === $field && WPPD_COPY_ACTION !== $action )
+                )
                     continue;
 
                 $destination[$field] = $source->$field;
@@ -226,7 +233,7 @@ if( !class_exists( 'WPPD' ) ) {
             }
 
             if( '' === self::get_original( $post_id ) ) {
-                $val = $duplicate ? $source->ID : '0';
+                $val = WPPD_DUPLICATE_ACTION === $action ? $source->ID : '0';
 
                 // Don't link to a duplicata
                 if( $val && self::is_duplicata( $source->ID ) )

@@ -97,6 +97,8 @@ class WPPD_Admin {
      * Add columns to the post types lists
      */
     public static function manage_posts_columns( $columns ) {
+        global $wp_list_table;
+
         $current_screen = get_current_screen();
         $post_type_obj = get_post_type_object( $current_screen->post_type );
 
@@ -104,7 +106,7 @@ class WPPD_Admin {
         if( !current_user_can( $post_type_obj->cap->edit_posts ) )
             return $columns;
 
-        if( self::is_duplicata_listing() || self::is_trash_listing() )
+        if( self::is_duplicata_listing() || $wp_list_table->is_trash )
             $columns+= array( 'original' => WPPD_STR_ORIGINAL_COLUMN_TITLE );
 
         if( !self::is_duplicata_listing() )
@@ -138,12 +140,5 @@ class WPPD_Admin {
      */
     public static function is_duplicata_listing() {
         return !empty( $_GET['post_status'] ) && 'duplicata' === $_GET['post_status'];
-    }
-
-    /**
-     * Return TRUE if we're listing trash
-     */
-    public static function is_trash_listing() {
-        return !empty( $_GET['post_status'] ) && 'trash' === $_GET['post_status'];
     }
 }

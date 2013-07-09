@@ -15,6 +15,7 @@ define( 'WPPD_STR_COPY_BUTTON', _x( 'Duplicate', 'copy button title on an origin
 define( 'WPPD_STR_ADD_NEW_FROM_BUTTON', _x( 'Add new from', 'copy button title on a duplicate', WPPD_DOMAIN ) );
 define( 'WPPD_STR_PUBLISH_META_BOX_TITLE', __( 'Publish', WPPD_DOMAIN ) );
 define( 'WPPD_STR_SAVE_DUPLICATA_BUTTON', __( 'Save', WPPD_DOMAIN ) );
+define( 'WPPD_STR_NONE', __( 'None', WPPD_DOMAIN ) );
 
 //
 // Pointers

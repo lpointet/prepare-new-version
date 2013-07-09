@@ -6,6 +6,9 @@ else
     $duplicata = WPPD::get_duplicata();
 ?>
 <ul>
+    <?php if( empty( $duplicata ) ): ?>
+        <?php echo WPPD_STR_NONE; ?>
+    <?php endif; ?>
     <?php foreach( $duplicata as $dup ): ?>
         <li>
             <a href="<?php echo add_query_arg( array( 'post' => $dup, 'action' => 'edit' ), admin_url( 'post.php' ) ); ?>" <?php echo get_the_ID() == $dup ? 'class="current"' : ''; ?>><?php echo get_the_title( $dup ); ?></a><br/>

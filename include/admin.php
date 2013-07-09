@@ -97,6 +97,10 @@ class WPPD_Admin {
      * Display duplicata meta box
      */
     public static function duplicata_meta_box() {
+        $post = get_post();
+        $original = WPPD::get_original();
+        $action_url = WPPD::get_action_url( $post );
+
         require WPPD_COMPLETE_PATH . '/template/duplicata_meta_box.php';
     }
 
@@ -104,6 +108,10 @@ class WPPD_Admin {
      * Display publish meta box
      */
     public static function submit_meta_box() {
+        $post = get_post();
+        $original = WPPD::get_original();
+        $action_url = WPPD::get_action_url( $post );
+
         require WPPD_COMPLETE_PATH . '/template/submit_meta_box.php';
     }
 

@@ -74,7 +74,7 @@ if( !class_exists( 'WPPD' ) ) {
                 'public' => FALSE,
                 'exclude_from_search' => TRUE,
                 'show_in_admin_all_list' => FALSE,
-                'label_count' => _n_noop( 'Duplicate <span class="count">(%s)</span>', 'Duplicates <span class="count">(%s)</span>', WPPD_DOMAIN ),
+                'label_count' => _n_noop( 'Pending version <span class="count">(%s)</span>', 'Pending versions <span class="count">(%s)</span>', WPPD_DOMAIN ),
             );
 
             $args = apply_filters( 'wppd_duplicata_status_args', $args );

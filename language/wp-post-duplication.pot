@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Post Duplication 1.0.0\n"
-"POT-Creation-Date: 2013-07-09 18:41+0100\n"
-"PO-Revision-Date: 2013-07-09 18:43+0100\n"
+"POT-Creation-Date: 2013-07-09 19:00+0100\n"
+"PO-Revision-Date: 2013-07-09 19:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: Lionel Pointet <lionel.pointet@gmail.com>\n"
 "Language: Fr\n"
@@ -86,20 +86,24 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: ../include/lang.php:22
-msgid "Prepare New Version"
+#: ../include/lang.php:18
+msgid "None"
 msgstr ""
 
 #: ../include/lang.php:23
+msgid "Prepare New Version"
+msgstr ""
+
+#: ../include/lang.php:24
 msgid ""
 "Thank you for activating our plugin, you can now try and duplicate any post "
 "you want"
 msgstr ""
 
-#: ../include/lang.php:28
+#: ../include/lang.php:29
 msgid "Version"
 msgstr ""
 
-#: ../include/lang.php:29
+#: ../include/lang.php:30
 msgid "This is a pending version from this original:"
 msgstr ""

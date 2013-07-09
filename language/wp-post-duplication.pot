@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Post Duplication 1.0.0\n"
-"POT-Creation-Date: 2013-06-10 16:36+0100\n"
-"PO-Revision-Date: 2013-06-10 16:38+0100\n"
+"POT-Creation-Date: 2013-07-09 18:41+0100\n"
+"PO-Revision-Date: 2013-07-09 18:43+0100\n"
 "Last-Translator: \n"
 "Language-Team: Lionel Pointet <lionel.pointet@gmail.com>\n"
 "Language: Fr\n"
@@ -10,65 +10,96 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.5\n"
-"X-Poedit-KeywordsList: __;_x:2c,1;_noop\n"
+"X-Poedit-KeywordsList: __;_x:2c,1;_n_noop:1,2\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: ../include\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#: ../include/lang.php:11
-msgctxt "meta box title"
-msgid "Duplicatas"
+#: ../wp_post_duplication.php:77
+#, php-format
+msgid "Pending version <span class=\"count\">(%s)</span>"
+msgid_plural "Pending versions <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../template/submit_meta_box.php:6
+msgid "Delete Permanently"
 msgstr ""
 
-#: ../include/lang.php:12
+#: ../template/submit_meta_box.php:8
+msgid "Move to Trash"
+msgstr ""
+
+#: ../include/lang.php:2
 msgctxt "post list column title"
-msgid "Duplicatas"
+msgid "Pending versions"
 msgstr ""
 
-#: ../include/lang.php:13
-msgid "Duplicata"
+#: ../include/lang.php:3
+msgctxt "post list column title"
+msgid "Is a version of"
 msgstr ""
 
-#: ../include/lang.php:14
-#, php-format
-msgid "Duplicata <span class=\"count\">(%s)</span>"
-msgstr ""
-
-#: ../include/lang.php:15
-#, php-format
-msgid "Duplicatas <span class=\"count\">(%s)</span>"
-msgstr ""
-
-#: ../include/lang.php:20
-msgid "Original: "
-msgstr ""
-
-#: ../include/lang.php:21
-msgid "This is an original"
-msgstr ""
-
-#: ../include/lang.php:22
-msgctxt "duplicatas list title in meta box"
-msgid "Duplicatas"
-msgstr ""
-
-#: ../include/lang.php:23
-msgid "Replace with this one"
-msgstr ""
-
-#: ../include/lang.php:24
+#: ../include/lang.php:4
+msgctxt "status label"
 msgid "Duplicate"
 msgstr ""
 
-#: ../include/lang.php:25
-msgid "Create a copy"
+#: ../include/lang.php:5
+msgid "[New Version]"
 msgstr ""
 
-#: ../include/lang.php:26
+#: ../include/lang.php:6
+msgid "[Copy]"
+msgstr ""
+
+#: ../include/lang.php:11
+msgctxt "meta box title"
+msgid "Pending versions"
+msgstr ""
+
+#: ../include/lang.php:12
+msgid "Update original"
+msgstr ""
+
+#: ../include/lang.php:13
+msgctxt "duplication button"
+msgid "Prepare new version"
+msgstr ""
+
+#: ../include/lang.php:14
+msgctxt "copy button title on an original"
+msgid "Duplicate"
+msgstr ""
+
+#: ../include/lang.php:15
+msgctxt "copy button title on a duplicate"
+msgid "Add new from"
+msgstr ""
+
+#: ../include/lang.php:16
 msgid "Publish"
 msgstr ""
 
-#: ../include/lang.php:27
-msgid "Save duplicata"
+#: ../include/lang.php:17
+msgid "Save"
+msgstr ""
+
+#: ../include/lang.php:22
+msgid "Prepare New Version"
+msgstr ""
+
+#: ../include/lang.php:23
+msgid ""
+"Thank you for activating our plugin, you can now try and duplicate any post "
+"you want"
+msgstr ""
+
+#: ../include/lang.php:28
+msgid "Version"
+msgstr ""
+
+#: ../include/lang.php:29
+msgid "This is a pending version from this original:"
 msgstr ""

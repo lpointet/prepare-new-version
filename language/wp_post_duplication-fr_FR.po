@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Post Duplication 1.0.0\n"
-"POT-Creation-Date: 2013-06-10 18:32+0100\n"
-"PO-Revision-Date: 2013-06-10 18:32+0100\n"
+"POT-Creation-Date: 2013-07-09 18:41+0100\n"
+"PO-Revision-Date: 2013-07-09 18:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: Lionel Pointet <lionel.pointet@gmail.com>\n"
 "Language: Fr\n"
@@ -11,85 +11,98 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.5\n"
 "X-Poedit-KeywordsList: __;_x:2c,1;_n_noop:1,2\n"
-"X-Poedit-Basepath: ..\n"
+"X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#: wp_post_duplication.php:77
+#: ../wp_post_duplication.php:77
 #, php-format
-msgid "Duplicate <span class=\"count\">(%s)</span>"
-msgid_plural "Duplicates <span class=\"count\">(%s)</span>"
-msgstr[0] "Duplicata <span class=\"count\">(%s)</span>"
-msgstr[1] "Duplicatas <span class=\"count\">(%s)</span>"
+msgid "Pending version <span class=\"count\">(%s)</span>"
+msgid_plural "Pending versions <span class=\"count\">(%s)</span>"
+msgstr[0] "Version en cours de préparation <span class=\"count\">(%s)</span>"
+msgstr[1] "Versions en cours de préparation <span class=\"count\">(%s)</span>"
 
-#: include/lang.php:2
-msgctxt "meta box title"
-msgid "Duplicates"
-msgstr "Duplicatas"
+#: ../template/submit_meta_box.php:6
+msgid "Delete Permanently"
+msgstr ""
 
-#: include/lang.php:3
+#: ../template/submit_meta_box.php:8
+msgid "Move to Trash"
+msgstr ""
+
+#: ../include/lang.php:2
 msgctxt "post list column title"
-msgid "Duplicates"
-msgstr "Duplicatas"
+msgid "Pending versions"
+msgstr "Versions en cours de préparation"
 
-#: include/lang.php:4
+#: ../include/lang.php:3
+msgctxt "post list column title"
+msgid "Is a version of"
+msgstr "Est une version de"
+
+#: ../include/lang.php:4
 msgctxt "status label"
 msgid "Duplicate"
 msgstr "Duplicata"
 
-#: include/lang.php:9
-msgid "Original: "
-msgstr "Original : "
+#: ../include/lang.php:5
+#, fuzzy
+msgid "[New Version]"
+msgstr "[Nouvelle Version]"
 
-#: include/lang.php:10
-msgid "This is an original"
-msgstr "Ceci est un original"
+#: ../include/lang.php:6
+msgid "[Copy]"
+msgstr "[Copie]"
 
-#: include/lang.php:11
-msgctxt "duplicatas list title in meta box"
-msgid "Duplicates"
-msgstr "Duplicatas"
+#: ../include/lang.php:11
+msgctxt "meta box title"
+msgid "Pending versions"
+msgstr "Versions en cours de préparation"
 
-#: include/lang.php:12
-msgid "Replace with this one"
-msgstr "Remplacer par celui-ci"
+#: ../include/lang.php:12
+msgid "Update original"
+msgstr "Mettre à jour l'original"
 
-#: include/lang.php:13
+#: ../include/lang.php:13
 msgctxt "duplication button"
+msgid "Prepare new version"
+msgstr "Préparer une nouvelle version"
+
+#: ../include/lang.php:14
+msgctxt "copy button title on an original"
 msgid "Duplicate"
 msgstr "Dupliquer"
 
-#: include/lang.php:14
-msgid "Create a copy"
-msgstr "Créer une copie"
+#: ../include/lang.php:15
+msgctxt "copy button title on a duplicate"
+msgid "Add new from"
+msgstr "En créer un nouveau"
 
-#: include/lang.php:15
+#: ../include/lang.php:16
 msgid "Publish"
-msgstr "Publication"
+msgstr "Publier"
 
-#: include/lang.php:16
-msgid "Save duplicate"
-msgstr "Enregistrer le duplicata"
+#: ../include/lang.php:17
+msgid "Save"
+msgstr "Enregistrer"
 
-#~ msgid "Duplicates <span class=\"count\">(%s)</span>"
-#~ msgstr "Duplicatas <span class=\"count\">(%s)</span>"
+#: ../include/lang.php:22
+msgid "Prepare New Version"
+msgstr "Préparer une nouvelle version"
 
-#~ msgctxt "Duplication button"
-#~ msgid "Duplicate"
-#~ msgstr "Duplicata"
+#: ../include/lang.php:23
+msgid ""
+"Thank you for activating our plugin, you can now try and duplicate any post "
+"you want"
+msgstr ""
+"Merci d'avoir activé notre extension, vous pouvez maintenant essayer de "
+"dupliquer l'article que vous souhaitez"
 
-#~ msgctxt "meta box title"
-#~ msgid "Duplicatas"
-#~ msgstr "Duplicatas"
+#: ../include/lang.php:28
+msgid "Version"
+msgstr "Version"
 
-#~ msgctxt "post list column title"
-#~ msgid "Duplicatas"
-#~ msgstr "Duplicatas"
-
-#~ msgid "Duplicata"
-#~ msgstr "Duplicata"
-
-#~ msgctxt "duplicatas list title in meta box"
-#~ msgid "Duplicatas"
-#~ msgstr "Duplicatas"
+#: ../include/lang.php:29
+msgid "This is a pending version from this original:"
+msgstr "Ceci est une version en cours de préparation de l'original :"

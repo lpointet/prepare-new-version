@@ -2,6 +2,8 @@
 define( 'WPPD_STR_DUPLICATA_COLUMN_TITLE', _x( 'Pending versions', 'post list column title', WPPD_DOMAIN ) );
 define( 'WPPD_STR_ORIGINAL_COLUMN_TITLE', _x( 'Is a version of', 'post list column title', WPPD_DOMAIN ) );
 define( 'WPPD_STR_DUPLICATA_STATUS_LABEL', _x( 'Duplicate', 'status label', WPPD_DOMAIN ) );
+define( 'WPPD_STR_DUPLICATE_PREPEND_TITLE', __( '[New Version]', WPPD_DOMAIN ) );
+define( 'WPPD_STR_COPY_PREPEND_TITLE', __( '[Copy]', WPPD_DOMAIN ) );
 
 //
 // Meta box

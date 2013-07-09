@@ -204,6 +204,16 @@ if( !class_exists( 'WPPD' ) ) {
                 $destination[$field] = $source->$field;
             }
 
+            // We may prepend some string to the post title
+            switch( $action ) {
+                case WPPD_DUPLICATE_ACTION:
+                    $destination['post_title'] = WPPD_STR_DUPLICATE_PREPEND_TITLE . ' ' . $destination['post_title'];
+                    break;
+                case WPPD_COPY_ACTION:
+                    $destination['post_title'] = WPPD_STR_COPY_PREPEND_TITLE . ' ' . $destination['post_title'];
+                    break;
+            }
+
             $destination = apply_filters( 'wppd_erase_content_destination', $destination, $source, $duplicate );
 
             $post_id = wp_insert_post( $destination );

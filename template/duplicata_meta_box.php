@@ -13,9 +13,9 @@ else
     <?php endforeach; ?>
 </ul>
 <p>
-    <a href="<?php echo add_query_arg( WPPD_ACTION_NAME, WPPD_DUPLICATE_ACTION, $action_url ); ?>" id="duplicate" class="button button-primary button-large"><?php echo WPPD_STR_DUPLICATE_BUTTON; ?></a>
+    <a href="<?php echo add_query_arg( WPPD_ACTION_NAME, WPPD_DUPLICATE_ACTION, $action_url ); ?>" id="duplicate" class="button <?php echo !empty( $original ) ? '' : 'button-primary button-large'; ?>"><?php echo WPPD_STR_DUPLICATE_BUTTON; ?></a>
 
     <?php if( empty( $original ) ): ?>
-        <a href="<?php echo add_query_arg( WPPD_ACTION_NAME, WPPD_COPY_ACTION , $action_url ); ?>" id="copy" class="button button-primary button-large"><?php echo WPPD_STR_COPY_BUTTON; ?></a>
+        <a href="<?php echo add_query_arg( WPPD_ACTION_NAME, WPPD_COPY_ACTION , $action_url ); ?>" id="copy" class="button"><?php echo WPPD_STR_COPY_BUTTON; ?></a>
     <?php endif; ?>
 </p>

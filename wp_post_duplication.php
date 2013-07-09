@@ -259,6 +259,16 @@ if( !class_exists( 'WPPD' ) ) {
 
             return isset($meta[$key]);
         }
+
+        /**
+         * Return URL where actions have to be sent
+         */
+        public static function get_action_url( $post ) {
+            $action_url = add_query_arg( array( 'ID' => $post->ID, 'action' => 'edit', 'post' => $post->ID ), admin_url( '/post.php' ) );
+            $action_url = wp_nonce_url( $action_url, WPPD_ACTION_NONCE );
+
+            return $action_url;
+        }
     }
     WPPD::hooks();
 }

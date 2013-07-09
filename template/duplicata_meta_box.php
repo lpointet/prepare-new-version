@@ -1,8 +1,7 @@
 <?php
 $post = get_post();
 $original = WPPD::get_original();
-$action_url = add_query_arg( array( 'post_type' => $post->post_type, 'ID' => $post->ID ), admin_url( '/edit.php' ) );
-$action_url = wp_nonce_url( $action_url, WPPD_ACTION_NONCE );
+$action_url = WPPD::get_action_url( $post );
 
 if( !empty( $original ) ) {
     $duplicata = WPPD::get_duplicata( $original );

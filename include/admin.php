@@ -1,5 +1,5 @@
 <?php
-class WPPD_Admin {
+class PNV_Admin {
     private static $current_screen_pointers = array();
 
     /**
@@ -23,7 +23,7 @@ class WPPD_Admin {
         self::handle_action();
 
         // Add other hooks
-        $post_type = WPPD_Option::get_post_types();
+        $post_type = PNV_Option::get_post_types();
         foreach( $post_type as $type ) {
             add_action( 'manage_' . $type . '_posts_columns', array( __CLASS__, 'manage_posts_columns' ) );
             add_action( 'manage_' . $type . '_posts_custom_column', array( __CLASS__, 'manage_posts_custom_column' ), 10, 2 );
@@ -38,28 +38,28 @@ class WPPD_Admin {
      * Handle duplicata / copy creation
      */
     public static function handle_action() {
-        if( !isset( $_GET[WPPD_ACTION_NAME] ) || !isset( $_GET['ID'] ) || !check_admin_referer( WPPD_ACTION_NONCE ) )
+        if( !isset( $_GET[PNV_ACTION_NAME] ) || !isset( $_GET['ID'] ) || !check_admin_referer( PNV_ACTION_NONCE ) )
             return;
 
         $source = get_post( $_GET['ID'] );
-        $post_types = WPPD_Option::get_post_types();
+        $post_types = PNV_Option::get_post_types();
 
         // Check post type
         if( !in_array( $source->post_type, $post_types ) )
             return;
 
-        switch( $_GET[WPPD_ACTION_NAME] ) {
-            case WPPD_DUPLICATE_ACTION:
-                $post_id = WPPD::erase_content( $source );
+        switch( $_GET[PNV_ACTION_NAME] ) {
+            case PNV_DUPLICATE_ACTION:
+                $post_id = PNV::erase_content( $source );
                 break;
-            case WPPD_COPY_ACTION:
+            case PNV_COPY_ACTION:
                 // Copy status is "draft"
                 $source->post_status = 'draft';
-                $post_id = WPPD::erase_content( $source, NULL, $_GET[WPPD_ACTION_NAME] );
+                $post_id = PNV::erase_content( $source, NULL, $_GET[PNV_ACTION_NAME] );
                 break;
-            case WPPD_ERASE_ACTION:
-                $destination = get_post( WPPD::get_original( $_GET['ID'] ) );
-                $post_id = WPPD::erase_content( $source, $destination, $_GET[WPPD_ACTION_NAME] );
+            case PNV_ERASE_ACTION:
+                $destination = get_post( PNV::get_original( $_GET['ID'] ) );
+                $post_id = PNV::erase_content( $source, $destination, $_GET[PNV_ACTION_NAME] );
                 break;
         }
 
@@ -71,7 +71,7 @@ class WPPD_Admin {
             'action' => 'edit',
         ), admin_url( '/post.php' ) );
 
-        if( !( $url = apply_filters( 'wppd_action_url_redirect', $url, $post_id ) ) )
+        if( !( $url = apply_filters( 'PNV_action_url_redirect', $url, $post_id ) ) )
             return;
 
         wp_safe_redirect($url);
@@ -82,18 +82,18 @@ class WPPD_Admin {
      * Add meta box with links to duplicatas
      */
     public static function add_meta_boxes() {
-        $post_type = WPPD_Option::get_post_types();
+        $post_type = PNV_Option::get_post_types();
 
         // If we are on a duplicata, remove default submit meta box and replace it with our box
         $current_screen = get_current_screen();
         $post = get_post();
-        if( in_array( $current_screen->post_type, $post_type ) && WPPD::is_duplicata( $post->ID ) ) {
+        if( in_array( $current_screen->post_type, $post_type ) && PNV::is_duplicata( $post->ID ) ) {
             remove_meta_box( 'submitdiv', $current_screen->post_type, 'side' );
-            add_meta_box( 'wppd_submit_meta_box', WPPD_STR_PUBLISH_META_BOX_TITLE, array( __CLASS__, 'submit_meta_box' ), $current_screen->post_type, 'side', 'core' );
+            add_meta_box( 'PNV_submit_meta_box', PNV_STR_PUBLISH_META_BOX_TITLE, array( __CLASS__, 'submit_meta_box' ), $current_screen->post_type, 'side', 'core' );
         }
 
         foreach( $post_type as $type )
-            add_meta_box( 'wppd_duplicata_meta_box', WPPD_STR_DUPLICATA_META_BOX_TITLE, array( __CLASS__, 'duplicata_meta_box' ), $type, 'side', 'core' );
+            add_meta_box( 'PNV_duplicata_meta_box', PNV_STR_DUPLICATA_META_BOX_TITLE, array( __CLASS__, 'duplicata_meta_box' ), $type, 'side', 'core' );
     }
 
     /**
@@ -101,10 +101,10 @@ class WPPD_Admin {
      */
     public static function duplicata_meta_box() {
         $post = get_post();
-        $original = WPPD::get_original();
-        $action_url = WPPD::get_action_url( $post );
+        $original = PNV::get_original();
+        $action_url = PNV::get_action_url( $post );
 
-        require WPPD_COMPLETE_PATH . '/template/duplicata_meta_box.php';
+        require PNV_COMPLETE_PATH . '/template/duplicata_meta_box.php';
     }
 
     /**
@@ -112,10 +112,10 @@ class WPPD_Admin {
      */
     public static function submit_meta_box() {
         $post = get_post();
-        $original = WPPD::get_original();
-        $action_url = WPPD::get_action_url( $post );
+        $original = PNV::get_original();
+        $action_url = PNV::get_action_url( $post );
 
-        require WPPD_COMPLETE_PATH . '/template/submit_meta_box.php';
+        require PNV_COMPLETE_PATH . '/template/submit_meta_box.php';
     }
 
     /**
@@ -132,10 +132,10 @@ class WPPD_Admin {
             return $columns;
 
         if( self::is_duplicata_listing() || $wp_list_table->is_trash )
-            $columns+= array( 'original' => WPPD_STR_ORIGINAL_COLUMN_TITLE );
+            $columns+= array( 'original' => PNV_STR_ORIGINAL_COLUMN_TITLE );
 
         if( !self::is_duplicata_listing() )
-            $columns+= array( 'duplicata' => WPPD_STR_DUPLICATA_COLUMN_TITLE );
+            $columns+= array( 'duplicata' => PNV_STR_DUPLICATA_COLUMN_TITLE );
 
         return $columns;
     }
@@ -148,16 +148,16 @@ class WPPD_Admin {
 
         switch( $column ) {
             case 'duplicata':
-                $duplicata = WPPD::get_duplicata( $post_id );
+                $duplicata = PNV::get_duplicata( $post_id );
                 $val = count( $duplicata );
                 break;
             case 'original':
-                $original = WPPD::get_original( $post_id );
+                $original = PNV::get_original( $post_id );
                 $val = !empty( $original ) ? '<a href="' . esc_url( add_query_arg( array( 'post' => $original, 'action' => 'edit' ), admin_url( 'post.php' ) ) ) . '">' . get_the_title( $original ) . '</a>' : ' - ';
                 break;
         }
 
-        echo apply_filters( 'wppd_' . $column . '_column_value', $val, $post_id );
+        echo apply_filters( 'PNV_' . $column . '_column_value', $val, $post_id );
     }
 
     /**
@@ -171,7 +171,7 @@ class WPPD_Admin {
      * Enqueue styles on listing WordPress pages
      */
     public static function admin_print_styles_edit() {
-        wp_enqueue_style( 'wppd_admin_css', WPPD_URL . '/css/wppd_admin.css' );
+        wp_enqueue_style( 'PNV_admin_css', PNV_URL . '/css/PNV_admin.css' );
     }
 
     /**
@@ -184,11 +184,11 @@ class WPPD_Admin {
         if( 'edit.php' !== $hook )
             return;
 
-        wp_enqueue_script( 'wppd_admin_js', WPPD_URL . '/js/wppd_admin.js', array(), NULL, TRUE );
+        wp_enqueue_script( 'PNV_admin_js', PNV_URL . '/js/PNV_admin.js', array(), NULL, TRUE );
     }
 
     /**
-     * Retrieves pointers for the current admin screen. Use the 'wppd_admin_pointers' hook to add your own pointers.
+     * Retrieves pointers for the current admin screen. Use the 'PNV_admin_pointers' hook to add your own pointers.
      * @return array Current screen pointers
      */
     private static function get_current_screen_pointers(){
@@ -201,9 +201,9 @@ class WPPD_Admin {
 
         $default_pointers = array(
             'plugins' => array(
-                'wppd_install' => array(
+                'PNV_install' => array(
                     'target' => '#menu-posts',
-                    'content' => '<h3>'. WPPD_STR_ACTIVATION_POINTER_TITLE .'</h3> <p>'. WPPD_STR_ACTIVATION_POINTER_CONTENT .'</p>',
+                    'content' => '<h3>'. PNV_STR_ACTIVATION_POINTER_TITLE .'</h3> <p>'. PNV_STR_ACTIVATION_POINTER_CONTENT .'</p>',
                     'position' => array( 'edge' => 'top', 'align' => 'top' ),
                 ),
             ),
@@ -212,7 +212,7 @@ class WPPD_Admin {
         if( !empty( $default_pointers[$screen_id] ) )
             $pointers = $default_pointers[$screen_id];
 
-        return apply_filters( 'wppd_admin_pointers', $pointers, $screen_id );
+        return apply_filters( 'PNV_admin_pointers', $pointers, $screen_id );
     }
 
     /**
@@ -296,15 +296,15 @@ class WPPD_Admin {
      * Add row actions on post list tables
      */
     public static function row_actions( $actions, $post ) {
-        $post_types = WPPD_Option::get_post_types();
+        $post_types = PNV_Option::get_post_types();
 
         // Don't do anything on an unsupported post type
         if( !in_array( $post->post_type, $post_types ) )
             return $actions;
 
         // Add "Prepare new version" action
-        $action_url = WPPD::get_action_url( $post );
-        $actions['prepare_new_version'] = '<a href="' . add_query_arg( WPPD_ACTION_NAME, WPPD_DUPLICATE_ACTION, $action_url ) . '" title="' . esc_attr( WPPD_STR_DUPLICATE_BUTTON ) . '">' . WPPD_STR_DUPLICATE_BUTTON . '</a>';
+        $action_url = PNV::get_action_url( $post );
+        $actions['prepare_new_version'] = '<a href="' . add_query_arg( PNV_ACTION_NAME, PNV_DUPLICATE_ACTION, $action_url ) . '" title="' . esc_attr( PNV_STR_DUPLICATE_BUTTON ) . '">' . PNV_STR_DUPLICATE_BUTTON . '</a>';
 
         return $actions;
     }
@@ -317,11 +317,11 @@ class WPPD_Admin {
         global $post_new_file, $post, $title;
 
         // We're not on a duplicate: don't do anything
-        if( !WPPD::is_duplicata( $post ) )
+        if( !PNV::is_duplicata( $post ) )
             return;
 
         $post_new_file = null;
-        $title.= ' ' . WPPD_STR_VERSION;
+        $title.= ' ' . PNV_STR_VERSION;
     }
 
     /**
@@ -330,18 +330,18 @@ class WPPD_Admin {
     public static function post_updated_messages( $messages ) {
         global $post;
 
-        if( !WPPD::is_duplicata() )
+        if( !PNV::is_duplicata() )
             return $messages;
 
-        $post_types = WPPD_Option::get_post_types();
-        $original = WPPD::get_original();
+        $post_types = PNV_Option::get_post_types();
+        $original = PNV::get_original();
 
         foreach( $post_types as $post_type ) {
             if( $post_type !== $post->post_type )
                 continue;
 
             $index = count( $messages[$post_type] );
-            $messages[$post_type][$index] = WPPD_STR_MESSAGE_DUPLICATE . ' <a href="' . esc_url( add_query_arg( array( 'post' => $original, 'action' => 'edit' ), admin_url( 'post.php' ) ) ) . '">' . get_the_title( $original ) . '</a>';
+            $messages[$post_type][$index] = PNV_STR_MESSAGE_DUPLICATE . ' <a href="' . esc_url( add_query_arg( array( 'post' => $original, 'action' => 'edit' ), admin_url( 'post.php' ) ) ) . '">' . get_the_title( $original ) . '</a>';
 
             if( !isset( $_GET['message'] ) )
                 $_GET['message'] = $index;

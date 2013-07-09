@@ -1,13 +1,13 @@
 <?php
 if( !empty( $original ) ) {
-    $duplicata = WPPD::get_duplicata( $original );
+    $duplicata = PNV::get_duplicata( $original );
 }
 else
-    $duplicata = WPPD::get_duplicata();
+    $duplicata = PNV::get_duplicata();
 ?>
 <ul>
     <?php if( empty( $duplicata ) ): ?>
-        <?php echo WPPD_STR_NONE; ?>
+        <?php echo PNV_STR_NONE; ?>
     <?php endif; ?>
     <?php foreach( $duplicata as $dup ): ?>
         <li>
@@ -17,9 +17,9 @@ else
     <?php endforeach; ?>
 </ul>
 <p>
-    <a href="<?php echo add_query_arg( WPPD_ACTION_NAME, WPPD_DUPLICATE_ACTION, $action_url ); ?>" id="duplicate" class="button <?php echo !empty( $original ) ? '' : 'button-primary button-large'; ?>"><?php echo WPPD_STR_DUPLICATE_BUTTON; ?></a>
+    <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_DUPLICATE_ACTION, $action_url ); ?>" id="duplicate" class="button <?php echo !empty( $original ) ? '' : 'button-primary button-large'; ?>"><?php echo PNV_STR_DUPLICATE_BUTTON; ?></a>
 
     <?php if( empty( $original ) ): ?>
-        <a href="<?php echo add_query_arg( WPPD_ACTION_NAME, WPPD_COPY_ACTION , $action_url ); ?>" id="copy" class="button"><?php echo WPPD_STR_COPY_BUTTON; ?></a>
+        <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_COPY_ACTION , $action_url ); ?>" id="copy" class="button"><?php echo PNV_STR_COPY_BUTTON; ?></a>
     <?php endif; ?>
 </p>

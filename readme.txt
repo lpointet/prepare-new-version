@@ -1,4 +1,4 @@
-=== Advanced Page Manager ===
+=== Prepare New Version ===
 Contributors: Lionel Pointet
 Tags: duplication, copy, admin, cms, content management
 Requires at least: 3.6.0
@@ -48,7 +48,7 @@ Yes. The plugin manages all built-in and custom post types.
 
 > This plugin is in beta stage.
 
-= wppd_duplicata_status_args =
+= pnv_duplicata_status_args =
 Filter that can be used to alter arguments sent to 'register_post_status'.
 Default arguments are:
  - label => Duplicate
@@ -59,16 +59,16 @@ Default arguments are:
     - singular => Duplicate <span class="count">(%s)</span>
     - plural => Duplicates <span class="count">(%s)</span>
 
-= wppd_erase_content_destination =
+= pnv_erase_content_destination =
 Filter that can be used to alter $destination array before 'wp_insert_post' get called when a copy, duplication or replacement is triggered
 This filter sends 2 other parameters: the $source object (WP_Post instance) and the $copy boolean
 
-= wppd_filtered_metas =
+= pnv_filtered_metas =
 Filter that can be used to alter meta names that must not be treated while a post is copied, duplicated or replaced
 The default metas is an array with these values:
- - _wppd_duplicata => true
+ - _pnv_duplicata => true
 
-= wppd_erase_content =
+= pnv_erase_content =
 Action triggered at the end of a copy, duplication or replacement.
 This action sends 4 parameters:
  - the $source object (WP_Post instance)
@@ -76,12 +76,12 @@ This action sends 4 parameters:
  - the $copy boolean
  - the destination's post ID
 
-= wppd_action_url_redirect =
+= pnv_action_url_redirect =
 Filter that can be used to alter redirect URL after a copy, duplication or replacement.
 The default value is the admin edit page for the destination post (the one that has been saved)
 This filter sends 1 other parameter: the destination post ID
 
-= wppd_{column_name}_column_value =
+= pnv_{column_name}_column_value =
 Filter that can be used to alter the value displayed on the posts list, in the '{column_name}' column.
 This plugin comes with only one custom column for now, 'duplicata', so {column_name} will always be 'duplicata', and the default value will be the count of duplicates for the post.
 This filter sends 1 other parameter: the post ID

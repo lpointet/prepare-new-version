@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:         WP Post Duplication
+ * Plugin Name:         Prepare New Version
  * Plugin URI:          http://www.globalis-ms.com/
- * Description:         Allow creating post 'duplicatas' to prepare new versions of one content
+ * Description:         Allow creating post 'duplicates' to prepare new versions of one content
  * Author:              Lionel POINTET, GLOBALIS media systems
  * Author URI:          http://www.globalis-ms.com
  *
@@ -11,26 +11,26 @@
  * Tested up to:        3.6
  */
 
-if( !class_exists( 'WPPD' ) ) {
+if( !class_exists( 'PNV' ) ) {
     // Load configuration
     require_once realpath( dirname( __FILE__ ) ) . '/include/config.php';
-    require_once WPPD_COMPLETE_PATH . '/include/option.php';
+    require_once PNV_COMPLETE_PATH . '/include/option.php';
 
     // Load textdomain
-    load_plugin_textdomain( WPPD_DOMAIN, NULL, WPPD_PATH . '/language/' );
+    load_plugin_textdomain( PNV_DOMAIN, NULL, PNV_PATH . '/language/' );
 
     // Load language
-    require_once WPPD_COMPLETE_PATH . '/include/lang.php';
+    require_once PNV_COMPLETE_PATH . '/include/lang.php';
 
     if( is_admin() ) {
-        require_once WPPD_COMPLETE_PATH . '/include/admin.php';
-        WPPD_Admin::hooks();
+        require_once PNV_COMPLETE_PATH . '/include/admin.php';
+        PNV_Admin::hooks();
     }
 
     /**
      * Main class of the plugin
      */
-    class WPPD {
+    class PNV {
         /**
          * Register hooks used by the plugin
          */
@@ -70,16 +70,16 @@ if( !class_exists( 'WPPD' ) ) {
          */
         public static function init() {
             $args = array(
-                'label' => WPPD_STR_DUPLICATA_STATUS_LABEL,
+                'label' => PNV_STR_DUPLICATA_STATUS_LABEL,
                 'public' => FALSE,
                 'exclude_from_search' => TRUE,
                 'show_in_admin_all_list' => FALSE,
-                'label_count' => _n_noop( 'Pending version <span class="count">(%s)</span>', 'Pending versions <span class="count">(%s)</span>', WPPD_DOMAIN ),
+                'label_count' => _n_noop( 'Pending version <span class="count">(%s)</span>', 'Pending versions <span class="count">(%s)</span>', PNV_DOMAIN ),
             );
 
-            $args = apply_filters( 'wppd_duplicata_status_args', $args );
+            $args = apply_filters( 'PNV_duplicata_status_args', $args );
 
-            register_post_status( WPPD_STATUS_NAME, $args );
+            register_post_status( PNV_STATUS_NAME, $args );
         }
 
         /**
@@ -93,7 +93,7 @@ if( !class_exists( 'WPPD' ) ) {
 
             $post = get_post( $post_id );
 
-            return WPPD_STATUS_NAME === $post->post_status;
+            return PNV_STATUS_NAME === $post->post_status;
         }
 
         /**
@@ -105,7 +105,7 @@ if( !class_exists( 'WPPD' ) ) {
                 $post_id = $post->ID;
             }
 
-            $post_type = WPPD_Option::get_post_types();
+            $post_type = PNV_Option::get_post_types();
 
             $posts = get_posts(array(
                 'post_type' => $post_type,
@@ -113,12 +113,12 @@ if( !class_exists( 'WPPD' ) ) {
                 'posts_per_page' => -1,
                 'meta_query' => array(
                     array(
-                        'key' => WPPD_META_NAME,
+                        'key' => PNV_META_NAME,
                         'value' => $post_id,
                         'type' => 'NUMERIC',
                     ),
                 ),
-                'post_status' => WPPD_STATUS_NAME,
+                'post_status' => PNV_STATUS_NAME,
                 'fields' => ($id ? 'ids' : ''),
             ));
 
@@ -138,7 +138,7 @@ if( !class_exists( 'WPPD' ) ) {
                 $post_id = $post->ID;
             }
 
-            return get_post_meta( $post_id, WPPD_META_NAME, TRUE );
+            return get_post_meta( $post_id, PNV_META_NAME, TRUE );
         }
 
         /**
@@ -146,7 +146,7 @@ if( !class_exists( 'WPPD' ) ) {
          */
         public function delete_post( $post_id ) {
             $post = get_post( $post_id );
-            $post_type = WPPD_Option::get_post_types();
+            $post_type = PNV_Option::get_post_types();
 
             if( !in_array( $post->post_type, $post_type ) || !( $duplicata = self::get_duplicata( $post_id ) ) || !empty( $REQUEST['delete_all'] ) )
                 return;
@@ -167,7 +167,7 @@ if( !class_exists( 'WPPD' ) ) {
          * If destination is not set, will create a duplicata of source
          * If duplicate is set to false, just create a copy of the post (no duplicate)
          */
-        public static function erase_content( $source, $destination = NULL, $action = WPPD_DUPLICATE_ACTION ) {
+        public static function erase_content( $source, $destination = NULL, $action = PNV_DUPLICATE_ACTION ) {
             $default_post = array(
                 'ID' => '',
                 'comment_status' => 'closed',
@@ -197,7 +197,7 @@ if( !class_exists( 'WPPD' ) ) {
                     'post_date_gmt' === $field ||
 
                     // Erase status only if we are doing a real "copy"
-                    ( 'post_status' === $field && WPPD_COPY_ACTION !== $action )
+                    ( 'post_status' === $field && PNV_COPY_ACTION !== $action )
                 )
                     continue;
 
@@ -206,15 +206,15 @@ if( !class_exists( 'WPPD' ) ) {
 
             // We may prepend some string to the post title
             switch( $action ) {
-                case WPPD_DUPLICATE_ACTION:
-                    $destination['post_title'] = WPPD_STR_DUPLICATE_PREPEND_TITLE . ' ' . $destination['post_title'];
+                case PNV_DUPLICATE_ACTION:
+                    $destination['post_title'] = PNV_STR_DUPLICATE_PREPEND_TITLE . ' ' . $destination['post_title'];
                     break;
-                case WPPD_COPY_ACTION:
-                    $destination['post_title'] = WPPD_STR_COPY_PREPEND_TITLE . ' ' . $destination['post_title'];
+                case PNV_COPY_ACTION:
+                    $destination['post_title'] = PNV_STR_COPY_PREPEND_TITLE . ' ' . $destination['post_title'];
                     break;
             }
 
-            $destination = apply_filters( 'wppd_erase_content_destination', $destination, $source, $duplicate );
+            $destination = apply_filters( 'PNV_erase_content_destination', $destination, $source, $duplicate );
 
             $post_id = wp_insert_post( $destination );
 
@@ -222,10 +222,11 @@ if( !class_exists( 'WPPD' ) ) {
                 return;
 
             // Add terms
-            $taxonomies = WPPD_Option::get_object_taxonomies( $source->post_type );
+            $taxonomies = PNV_Option::get_object_taxonomies( $source->post_type );
             foreach( $taxonomies as $taxonomy ) {
                 $tax_terms = array();
                 $terms = get_the_terms( $source->ID, $taxonomy );
+
                 foreach( $terms as $term )
                     $tax_terms[] = $term->slug;
                 wp_set_object_terms( $post_id, $tax_terms, $taxonomy );
@@ -243,16 +244,16 @@ if( !class_exists( 'WPPD' ) ) {
             }
 
             if( '' === self::get_original( $post_id ) ) {
-                $val = WPPD_DUPLICATE_ACTION === $action ? $source->ID : '0';
+                $val = PNV_DUPLICATE_ACTION === $action ? $source->ID : '0';
 
                 // Don't link to a duplicata
                 if( $val && self::is_duplicata( $source->ID ) )
                     $val = self::get_original( $source->ID );
 
-                update_post_meta( $post_id, WPPD_META_NAME, $val );
+                update_post_meta( $post_id, PNV_META_NAME, $val );
             }
 
-            do_action( 'wppd_erase_content', $source, $destination, $duplicate, $post_id );
+            do_action( 'PNV_erase_content', $source, $destination, $duplicate, $post_id );
 
             return $post_id;
         }
@@ -262,10 +263,10 @@ if( !class_exists( 'WPPD' ) ) {
          */
         public static function is_filtered_meta($key) {
             $meta = array(
-                WPPD_META_NAME => TRUE,
+                PNV_META_NAME => TRUE,
             );
 
-            $meta = apply_filters( 'wppd_filtered_metas', $meta );
+            $meta = apply_filters( 'PNV_filtered_metas', $meta );
 
             return isset($meta[$key]);
         }
@@ -275,10 +276,10 @@ if( !class_exists( 'WPPD' ) ) {
          */
         public static function get_action_url( $post ) {
             $action_url = add_query_arg( array( 'ID' => $post->ID, 'action' => 'edit', 'post' => $post->ID ), admin_url( '/post.php' ) );
-            $action_url = wp_nonce_url( $action_url, WPPD_ACTION_NONCE );
+            $action_url = wp_nonce_url( $action_url, PNV_ACTION_NONCE );
 
             return $action_url;
         }
     }
-    WPPD::hooks();
+    PNV::hooks();
 }

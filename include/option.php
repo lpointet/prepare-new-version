@@ -2,7 +2,7 @@
 /**
  * Option management for the plugin
  */
-class WPPD_Option {
+class PNV_Option {
     /**
      * Returns a list of post types for which the plugin will do something
      * Default: returns the list of all registered post types

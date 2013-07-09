@@ -227,6 +227,9 @@ if( !class_exists( 'PNV' ) ) {
                 $tax_terms = array();
                 $terms = get_the_terms( $source->ID, $taxonomy );
 
+                if( !$terms )
+                    continue;
+
                 foreach( $terms as $term )
                     $tax_terms[] = $term->slug;
                 wp_set_object_terms( $post_id, $tax_terms, $taxonomy );

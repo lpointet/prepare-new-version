@@ -104,9 +104,10 @@ class WPPD_Admin {
         if( !current_user_can( $post_type_obj->cap->edit_posts ) )
             return $columns;
 
-        if( self::is_duplicata_listing() )
+        if( self::is_duplicata_listing() || self::is_trash_listing() )
             $columns+= array( 'original' => WPPD_STR_ORIGINAL_COLUMN_TITLE );
-        else
+
+        if( !self::is_duplicata_listing() )
             $columns+= array( 'duplicata' => WPPD_STR_DUPLICATA_COLUMN_TITLE );
 
         return $columns;
@@ -125,7 +126,7 @@ class WPPD_Admin {
                 break;
             case 'original':
                 $original = WPPD::get_original( $post_id );
-                $val = '<a href="' . esc_url( add_query_arg( array( 'post' => $original, 'action' => 'edit' ), admin_url( 'post.php' ) ) ) . '">' . get_the_title( $original ) . '</a>';
+                $val = !empty( $original ) ? '<a href="' . esc_url( add_query_arg( array( 'post' => $original, 'action' => 'edit' ), admin_url( 'post.php' ) ) ) . '">' . get_the_title( $original ) . '</a>' : ' - ';
                 break;
         }
 
@@ -137,5 +138,12 @@ class WPPD_Admin {
      */
     public static function is_duplicata_listing() {
         return !empty( $_GET['post_status'] ) && 'duplicata' === $_GET['post_status'];
+    }
+
+    /**
+     * Return TRUE if we're listing trash
+     */
+    public static function is_trash_listing() {
+        return !empty( $_GET['post_status'] ) && 'trash' === $_GET['post_status'];
     }
 }

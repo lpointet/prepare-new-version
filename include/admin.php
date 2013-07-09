@@ -309,14 +309,16 @@ class WPPD_Admin {
 
     /**
      * Hide "Add new" button from a duplicate edit screen
+     * Edit title from that screen
      */
     public static function admin_head_post() {
-        global $post_new_file, $post;
+        global $post_new_file, $post, $title;
 
         // We're not on a duplicate: don't do anything
         if( !WPPD::is_duplicata( $post ) )
             return;
 
         $post_new_file = null;
+        $title.= ' ' . WPPD_STR_VERSION;
     }
 }

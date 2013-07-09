@@ -20,6 +20,9 @@ class WPPD_Admin {
             add_action( 'manage_' . $type . '_posts_columns', array( __CLASS__, 'manage_posts_columns' ) );
             add_action( 'manage_' . $type . '_posts_custom_column', array( __CLASS__, 'manage_posts_custom_column' ), 10, 2 );
         }
+
+        add_action( 'admin_print_styles-edit.php', array( __CLASS__, 'admin_print_styles_edit' ) );
+        add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
     }
 
     /**
@@ -140,5 +143,22 @@ class WPPD_Admin {
      */
     public static function is_duplicata_listing() {
         return !empty( $_GET['post_status'] ) && 'duplicata' === $_GET['post_status'];
+    }
+
+    /**
+     * Enqueue styles on listing WordPress pages
+     */
+    public static function admin_print_styles_edit() {
+        wp_enqueue_style( 'wppd_admin_css', WPPD_URL . '/css/wppd_admin.css' );
+    }
+
+    /**
+     * Enqueue scripts on listing WordPress pages
+     */
+    public static function admin_enqueue_scripts( $hook ) {
+        if( 'edit.php' !== $hook )
+            return;
+
+        wp_enqueue_script( 'wppd_admin_js', WPPD_URL . '/js/wppd_admin.js', array(), NULL, TRUE );
     }
 }

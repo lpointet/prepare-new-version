@@ -29,6 +29,7 @@ class WPPD_Admin {
 
         add_action( 'admin_print_styles-edit.php', array( __CLASS__, 'admin_print_styles_edit' ) );
         add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
+        add_action( 'admin_head-post.php', array( __CLASS__, 'admin_head_post' ) );
     }
 
     /**
@@ -304,5 +305,18 @@ class WPPD_Admin {
         $actions['prepare_new_version'] = '<a href="' . add_query_arg( WPPD_ACTION_NAME, WPPD_DUPLICATE_ACTION, $action_url ) . '" title="' . esc_attr( WPPD_STR_DUPLICATE_BUTTON ) . '">' . WPPD_STR_DUPLICATE_BUTTON . '</a>';
 
         return $actions;
+    }
+
+    /**
+     * Hide "Add new" button from a duplicate edit screen
+     */
+    public static function admin_head_post() {
+        global $post_new_file, $post;
+
+        // We're not on a duplicate: don't do anything
+        if( !WPPD::is_duplicata( $post ) )
+            return;
+
+        $post_new_file = null;
     }
 }

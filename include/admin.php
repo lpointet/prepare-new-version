@@ -12,6 +12,8 @@ class WPPD_Admin {
         // 2 hooks because of 2 types of content types: hierarchical (page) or not (post)
         add_filter( 'page_row_actions', array( __CLASS__, 'row_actions' ), 10, 2 );
         add_filter( 'post_row_actions', array( __CLASS__, 'row_actions' ), 10, 2 );
+
+        add_filter( 'post_updated_messages', array( __CLASS__, 'post_updated_messages' ) );
     }
 
     /**
@@ -320,5 +322,31 @@ class WPPD_Admin {
 
         $post_new_file = null;
         $title.= ' ' . WPPD_STR_VERSION;
+    }
+
+    /**
+     * Add a message to admin screens to display that a post is a duplicate
+     */
+    public static function post_updated_messages( $messages ) {
+        global $post;
+
+        if( !WPPD::is_duplicata() )
+            return $messages;
+
+        $post_types = WPPD_Option::get_post_types();
+        $original = WPPD::get_original();
+
+        foreach( $post_types as $post_type ) {
+            if( $post_type !== $post->post_type )
+                continue;
+
+            $index = count( $messages[$post_type] );
+            $messages[$post_type][$index] = WPPD_STR_MESSAGE_DUPLICATE . ' <a href="' . esc_url( add_query_arg( array( 'post' => $original, 'action' => 'edit' ), admin_url( 'post.php' ) ) ) . '">' . get_the_title( $original ) . '</a>';
+
+            if( !isset( $_GET['message'] ) )
+                $_GET['message'] = $index;
+        }
+
+        return $messages;
     }
 }

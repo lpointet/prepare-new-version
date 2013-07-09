@@ -26,3 +26,4 @@ define( 'WPPD_STR_ACTIVATION_POINTER_CONTENT', __( 'Thank you for activating our
 // Edit screen
 //
 define( 'WPPD_STR_VERSION', __( 'Version', WPPD_DOMAIN ) );
+define( 'WPPD_STR_MESSAGE_DUPLICATE', __( 'This is a pending version from this original:', WPPD_DOMAIN ) );

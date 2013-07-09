@@ -15,3 +15,9 @@ define( 'WPPD_STR_DUPLICATE_BUTTON', _x( 'Duplicate', 'duplication button', WPPD
 define( 'WPPD_STR_COPY_BUTTON', __( 'Create a copy', WPPD_DOMAIN ) );
 define( 'WPPD_STR_PUBLISH_META_BOX_TITLE', __( 'Publish', WPPD_DOMAIN ) );
 define( 'WPPD_STR_SAVE_DUPLICATA_BUTTON', __( 'Save duplicate', WPPD_DOMAIN ) );
+
+//
+// Pointers
+//
+define( 'WPPD_STR_ACTIVATION_POINTER_TITLE', __( 'Prepare New Version', WPPD_DOMAIN ) );
+define( 'WPPD_STR_ACTIVATION_POINTER_CONTENT', __( 'Thank you for activating our plugin, you can now try and duplicate any post you want', WPPD_DOMAIN ) );

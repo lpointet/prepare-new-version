@@ -104,7 +104,12 @@ class WPPD_Admin {
         if( !current_user_can( $post_type_obj->cap->edit_posts ) )
             return $columns;
 
-        return $columns + array('duplicata' => WPPD_STR_DUPLICATA_COLUMN_TITLE);
+        if( self::is_duplicata_listing() )
+            $columns+= array( 'original' => WPPD_STR_ORIGINAL_COLUMN_TITLE );
+        else
+            $columns+= array( 'duplicata' => WPPD_STR_DUPLICATA_COLUMN_TITLE );
+
+        return $columns;
     }
 
     /**
@@ -118,8 +123,19 @@ class WPPD_Admin {
                 $duplicata = WPPD::get_duplicata( $post_id );
                 $val = count( $duplicata );
                 break;
+            case 'original':
+                $original = WPPD::get_original( $post_id );
+                $val = '<a href="' . esc_url( add_query_arg( array( 'post' => $original, 'action' => 'edit' ), admin_url( 'post.php' ) ) ) . '">' . get_the_title( $original ) . '</a>';
+                break;
         }
 
         echo apply_filters( 'wppd_' . $column . '_column_value', $val, $post_id );
+    }
+
+    /**
+     * Return TRUE if we're listing duplicates
+     */
+    public static function is_duplicata_listing() {
+        return !empty( $_GET['post_status'] ) && 'duplicata' === $_GET['post_status'];
     }
 }

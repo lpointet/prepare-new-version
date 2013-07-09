@@ -1,6 +1,7 @@
 <?php
 define( 'WPPD_STR_DUPLICATA_META_BOX_TITLE', _x( 'Duplicates', 'meta box title', WPPD_DOMAIN ) );
 define( 'WPPD_STR_DUPLICATA_COLUMN_TITLE', _x( 'Duplicates', 'post list column title', WPPD_DOMAIN ) );
+define( 'WPPD_STR_ORIGINAL_COLUMN_TITLE', _x( 'Original', 'post list column title', WPPD_DOMAIN ) );
 define( 'WPPD_STR_DUPLICATA_STATUS_LABEL', _x( 'Duplicate', 'status label', WPPD_DOMAIN ) );
 
 //

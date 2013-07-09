@@ -8,6 +8,10 @@ class WPPD_Admin {
     public static function hooks() {
         add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
         add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ) );
+
+        // 2 hooks because of 2 types of content types: hierarchical (page) or not (post)
+        add_filter( 'page_row_actions', array( __CLASS__, 'row_actions' ), 10, 2 );
+        add_filter( 'post_row_actions', array( __CLASS__, 'row_actions' ), 10, 2 );
     }
 
     /**
@@ -35,6 +39,11 @@ class WPPD_Admin {
             return;
 
         $source = get_post( $_GET['ID'] );
+        $post_types = WPPD_Option::get_post_types();
+
+        // Check post type
+        if( !in_array( $source->post_type, $post_types ) )
+            return;
 
         switch( $_GET[WPPD_ACTION_NAME] ) {
             case WPPD_DUPLICATE_ACTION:
@@ -270,5 +279,22 @@ class WPPD_Admin {
             // ]]></script>
             <?php
         endif;
+    }
+
+    /**
+     * Add row actions on post list tables
+     */
+    public static function row_actions( $actions, $post ) {
+        $post_types = WPPD_Option::get_post_types();
+
+        // Don't do anything on an unsupported post type
+        if( !in_array( $post->post_type, $post_types ) )
+            return $actions;
+
+        // Add "Prepare new version" action
+        $action_url = WPPD::get_action_url( $post );
+        $actions['prepare_new_version'] = '<a href="' . add_query_arg( WPPD_ACTION_NAME, WPPD_DUPLICATE_ACTION, $action_url ) . '" title="' . esc_attr( WPPD_STR_DUPLICATE_BUTTON ) . '">' . WPPD_STR_DUPLICATE_BUTTON . '</a>';
+
+        return $actions;
     }
 }

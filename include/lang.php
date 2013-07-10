@@ -9,6 +9,7 @@ define( 'PNV_STR_COPY_PREPEND_TITLE', __( '[Copy]', PNV_DOMAIN ) );
 // Meta box
 //
 define( 'PNV_STR_DUPLICATA_META_BOX_TITLE', _x( 'Pending versions', 'meta box title', PNV_DOMAIN ) );
+define( 'PNV_STR_OTHER_DUPLICATA_META_BOX_TITLE', __( 'Other pending versions', PNV_DOMAIN ) );
 define( 'PNV_STR_ERASE_BUTTON', __( 'Update original', PNV_DOMAIN ) );
 define( 'PNV_STR_DUPLICATE_BUTTON', _x( 'Prepare new version', 'duplication button', PNV_DOMAIN ) );
 define( 'PNV_STR_COPY_BUTTON', _x( 'Duplicate', 'copy button title on an original', PNV_DOMAIN ) );

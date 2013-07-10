@@ -7,7 +7,7 @@ class PNV_Admin {
      */
     public static function hooks() {
         add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
-        add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ) );
+        add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ), 10, 2 );
 
         // 2 hooks because of 2 types of content types: hierarchical (page) or not (post)
         add_filter( 'page_row_actions', array( __CLASS__, 'row_actions' ), 10, 2 );
@@ -81,19 +81,25 @@ class PNV_Admin {
     /**
      * Add meta box with links to duplicatas
      */
-    public static function add_meta_boxes() {
+    public static function add_meta_boxes( $current_post_type, $post ) {
         $post_type = PNV_Option::get_post_types();
 
+        // Post type not supported: don't do anything
+        if( !in_array( $current_post_type, $post_type ) )
+            return;
+
+        $title = PNV_STR_DUPLICATA_META_BOX_TITLE;
+
         // If we are on a duplicata, remove default submit meta box and replace it with our box
-        $current_screen = get_current_screen();
-        $post = get_post();
-        if( in_array( $current_screen->post_type, $post_type ) && PNV::is_duplicata( $post->ID ) ) {
+        if( PNV::is_duplicata( $post->ID ) ) {
             remove_meta_box( 'submitdiv', $current_screen->post_type, 'side' );
             add_meta_box( 'PNV_submit_meta_box', PNV_STR_PUBLISH_META_BOX_TITLE, array( __CLASS__, 'submit_meta_box' ), $current_screen->post_type, 'side', 'core' );
+
+            // Replace "duplicates" meta box title
+            $title = PNV_STR_OTHER_DUPLICATA_META_BOX_TITLE;
         }
 
-        foreach( $post_type as $type )
-            add_meta_box( 'PNV_duplicata_meta_box', PNV_STR_DUPLICATA_META_BOX_TITLE, array( __CLASS__, 'duplicata_meta_box' ), $type, 'side', 'core' );
+        add_meta_box( 'PNV_duplicata_meta_box', $title, array( __CLASS__, 'duplicata_meta_box' ), $current_post_type, 'side', 'core' );
     }
 
     /**

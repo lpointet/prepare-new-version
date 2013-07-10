@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Post Duplication 1.0.0\n"
-"POT-Creation-Date: 2013-07-09 19:00+0100\n"
-"PO-Revision-Date: 2013-07-09 19:00+0100\n"
+"POT-Creation-Date: 2013-07-10 11:06+0100\n"
+"PO-Revision-Date: 2013-07-10 11:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: Lionel Pointet <lionel.pointet@gmail.com>\n"
 "Language: Fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../wp_post_duplication.php:77
+#: ../prepare_new_version.php:77
 #, php-format
 msgid "Pending version <span class=\"count\">(%s)</span>"
 msgid_plural "Pending versions <span class=\"count\">(%s)</span>"
@@ -60,50 +60,54 @@ msgid "Pending versions"
 msgstr ""
 
 #: ../include/lang.php:12
-msgid "Update original"
+msgid "Other pending versions"
 msgstr ""
 
 #: ../include/lang.php:13
+msgid "Update original"
+msgstr ""
+
+#: ../include/lang.php:14
 msgctxt "duplication button"
 msgid "Prepare new version"
 msgstr ""
 
-#: ../include/lang.php:14
+#: ../include/lang.php:15
 msgctxt "copy button title on an original"
 msgid "Duplicate"
 msgstr ""
 
-#: ../include/lang.php:15
+#: ../include/lang.php:16
 msgctxt "copy button title on a duplicate"
 msgid "Add new from"
 msgstr ""
 
-#: ../include/lang.php:16
+#: ../include/lang.php:17
 msgid "Publish"
 msgstr ""
 
-#: ../include/lang.php:17
+#: ../include/lang.php:18
 msgid "Save"
 msgstr ""
 
-#: ../include/lang.php:18
+#: ../include/lang.php:19
 msgid "None"
 msgstr ""
 
-#: ../include/lang.php:23
+#: ../include/lang.php:24
 msgid "Prepare New Version"
 msgstr ""
 
-#: ../include/lang.php:24
+#: ../include/lang.php:25
 msgid ""
 "Thank you for activating our plugin, you can now try and duplicate any post "
 "you want"
 msgstr ""
 
-#: ../include/lang.php:29
+#: ../include/lang.php:30
 msgid "Version"
 msgstr ""
 
-#: ../include/lang.php:30
+#: ../include/lang.php:31
 msgid "This is a pending version from this original:"
 msgstr ""

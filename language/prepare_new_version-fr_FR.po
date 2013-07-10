@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Post Duplication 1.0.0\n"
-"POT-Creation-Date: 2013-07-09 19:01+0100\n"
-"PO-Revision-Date: 2013-07-09 19:01+0100\n"
+"POT-Creation-Date: 2013-07-10 11:05+0100\n"
+"PO-Revision-Date: 2013-07-10 11:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: Lionel Pointet <lionel.pointet@gmail.com>\n"
 "Language: Fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../wp_post_duplication.php:77
+#: ../prepare_new_version.php:77
 #, php-format
 msgid "Pending version <span class=\"count\">(%s)</span>"
 msgid_plural "Pending versions <span class=\"count\">(%s)</span>"
@@ -47,7 +47,6 @@ msgid "Duplicate"
 msgstr "Duplicata"
 
 #: ../include/lang.php:5
-#, fuzzy
 msgid "[New Version]"
 msgstr "[Nouvelle Version]"
 
@@ -61,41 +60,45 @@ msgid "Pending versions"
 msgstr "Versions en cours de préparation"
 
 #: ../include/lang.php:12
+msgid "Other pending versions"
+msgstr "Autres versions en cours de préparation"
+
+#: ../include/lang.php:13
 msgid "Update original"
 msgstr "Mettre à jour l'original"
 
-#: ../include/lang.php:13
+#: ../include/lang.php:14
 msgctxt "duplication button"
 msgid "Prepare new version"
 msgstr "Préparer une nouvelle version"
 
-#: ../include/lang.php:14
+#: ../include/lang.php:15
 msgctxt "copy button title on an original"
 msgid "Duplicate"
 msgstr "Dupliquer"
 
-#: ../include/lang.php:15
+#: ../include/lang.php:16
 msgctxt "copy button title on a duplicate"
 msgid "Add new from"
 msgstr "En créer un nouveau"
 
-#: ../include/lang.php:16
+#: ../include/lang.php:17
 msgid "Publish"
 msgstr "Publier"
 
-#: ../include/lang.php:17
+#: ../include/lang.php:18
 msgid "Save"
 msgstr "Enregistrer"
 
-#: ../include/lang.php:18
+#: ../include/lang.php:19
 msgid "None"
 msgstr "Aucun"
 
-#: ../include/lang.php:23
+#: ../include/lang.php:24
 msgid "Prepare New Version"
 msgstr "Préparer une nouvelle version"
 
-#: ../include/lang.php:24
+#: ../include/lang.php:25
 msgid ""
 "Thank you for activating our plugin, you can now try and duplicate any post "
 "you want"
@@ -103,10 +106,10 @@ msgstr ""
 "Merci d'avoir activé notre extension, vous pouvez maintenant essayer de "
 "dupliquer l'article que vous souhaitez"
 
-#: ../include/lang.php:29
+#: ../include/lang.php:30
 msgid "Version"
 msgstr "Version"
 
-#: ../include/lang.php:30
+#: ../include/lang.php:31
 msgid "This is a pending version from this original:"
 msgstr "Ceci est une version en cours de préparation de l'original :"

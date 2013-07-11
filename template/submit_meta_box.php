@@ -19,4 +19,13 @@
         <div class="clear"></div>
         <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_COPY_ACTION , $action_url ); ?>" id="copy" class=""><?php echo PNV_STR_COPY_BUTTON; ?></a>
     </div>
+    <div id="preview-action">
+        <?php
+        $preview_link = set_url_scheme( get_permalink( $post->ID ) );
+        $preview_link = esc_url( apply_filters( 'preview_post_link', add_query_arg( 'preview', 'true', $preview_link ) ) );
+        $preview_button = __( 'Preview' );
+        ?>
+        <a class="preview button" href="<?php echo $preview_link; ?>" target="wp-preview" id="post-preview"><?php echo $preview_button; ?></a>
+        <input type="hidden" name="wp-preview" id="wp-preview" value="" />
+    </div>
 </div>

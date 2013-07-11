@@ -75,6 +75,7 @@ if( !class_exists( 'PNV' ) ) {
                 'exclude_from_search' => TRUE,
                 'show_in_admin_all_list' => FALSE,
                 'label_count' => _n_noop( 'Pending version <span class="count">(%s)</span>', 'Pending versions <span class="count">(%s)</span>', PNV_DOMAIN ),
+                'protected' => TRUE,
             );
 
             $args = apply_filters( 'PNV_duplicata_status_args', $args );

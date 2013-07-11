@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Post Duplication 1.0.0\n"
-"POT-Creation-Date: 2013-07-10 11:05+0100\n"
-"PO-Revision-Date: 2013-07-10 11:06+0100\n"
+"POT-Creation-Date: 2013-07-11 11:20+0100\n"
+"PO-Revision-Date: 2013-07-11 11:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: Lionel Pointet <lionel.pointet@gmail.com>\n"
 "Language: Fr\n"
@@ -23,11 +23,15 @@ msgid_plural "Pending versions <span class=\"count\">(%s)</span>"
 msgstr[0] "Version en cours de préparation <span class=\"count\">(%s)</span>"
 msgstr[1] "Versions en cours de préparation <span class=\"count\">(%s)</span>"
 
-#: ../template/submit_meta_box.php:6
+#: ../template/submit_meta_box.php:11
+msgid "Preview"
+msgstr ""
+
+#: ../template/submit_meta_box.php:28
 msgid "Delete Permanently"
 msgstr ""
 
-#: ../template/submit_meta_box.php:8
+#: ../template/submit_meta_box.php:30
 msgid "Move to Trash"
 msgstr ""
 
@@ -79,8 +83,8 @@ msgstr "Dupliquer"
 
 #: ../include/lang.php:16
 msgctxt "copy button title on a duplicate"
-msgid "Add new from"
-msgstr "En créer un nouveau"
+msgid "Create as new"
+msgstr "Créer comme nouveau"
 
 #: ../include/lang.php:17
 msgid "Publish"
@@ -113,3 +117,7 @@ msgstr "Version"
 #: ../include/lang.php:31
 msgid "This is a pending version from this original:"
 msgstr "Ceci est une version en cours de préparation de l'original :"
+
+#~ msgctxt "copy button title on a duplicate"
+#~ msgid "Add new from"
+#~ msgstr "En créer un nouveau"

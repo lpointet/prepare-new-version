@@ -29,7 +29,7 @@ class PNV_Admin {
             add_action( 'manage_' . $type . '_posts_custom_column', array( __CLASS__, 'manage_posts_custom_column' ), 10, 2 );
         }
 
-        add_action( 'admin_print_styles-edit.php', array( __CLASS__, 'admin_print_styles_edit' ) );
+        add_action( 'admin_print_styles', array( __CLASS__, 'admin_print_styles' ) );
         add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
         add_action( 'admin_head-post.php', array( __CLASS__, 'admin_head_post' ) );
     }
@@ -71,7 +71,7 @@ class PNV_Admin {
             'action' => 'edit',
         ), admin_url( '/post.php' ) );
 
-        if( !( $url = apply_filters( 'PNV_action_url_redirect', $url, $post_id ) ) )
+        if( !( $url = apply_filters( 'pnv_action_url_redirect', $url, $post_id ) ) )
             return;
 
         wp_safe_redirect($url);
@@ -93,13 +93,13 @@ class PNV_Admin {
         // If we are on a duplicata, remove default submit meta box and replace it with our box
         if( PNV::is_duplicata( $post->ID ) ) {
             remove_meta_box( 'submitdiv', $current_screen->post_type, 'side' );
-            add_meta_box( 'PNV_submit_meta_box', PNV_STR_PUBLISH_META_BOX_TITLE, array( __CLASS__, 'submit_meta_box' ), $current_screen->post_type, 'side', 'core' );
+            add_meta_box( 'pnv_submit_meta_box', PNV_STR_PUBLISH_META_BOX_TITLE, array( __CLASS__, 'submit_meta_box' ), $current_screen->post_type, 'side', 'core' );
 
             // Replace "duplicates" meta box title
             $title = PNV_STR_OTHER_DUPLICATA_META_BOX_TITLE;
         }
 
-        add_meta_box( 'PNV_duplicata_meta_box', $title, array( __CLASS__, 'duplicata_meta_box' ), $current_post_type, 'side', 'core' );
+        add_meta_box( 'pnv_duplicata_meta_box', $title, array( __CLASS__, 'duplicata_meta_box' ), $current_post_type, 'side', 'core' );
     }
 
     /**
@@ -163,7 +163,7 @@ class PNV_Admin {
                 break;
         }
 
-        echo apply_filters( 'PNV_' . $column . '_column_value', $val, $post_id );
+        echo apply_filters( 'pnv_' . $column . '_column_value', $val, $post_id );
     }
 
     /**
@@ -176,8 +176,15 @@ class PNV_Admin {
     /**
      * Enqueue styles on listing WordPress pages
      */
-    public static function admin_print_styles_edit() {
-        wp_enqueue_style( 'PNV_admin_css', PNV_URL . '/css/PNV_admin.css' );
+    public static function admin_print_styles() {
+        $screen = get_current_screen();
+        $post_type = PNV_Option::get_post_types();
+
+        // Don't include our styles if we don't need it on that screen
+        if( !in_array( $screen->base, array( 'post', 'edit' ) ) || !in_array( $screen->post_type, $post_type ) )
+            return;
+
+        wp_enqueue_style( 'pnv_admin_css', PNV_URL . '/css/pnv_admin.css' );
     }
 
     /**
@@ -190,7 +197,7 @@ class PNV_Admin {
         if( 'edit.php' !== $hook )
             return;
 
-        wp_enqueue_script( 'PNV_admin_js', PNV_URL . '/js/PNV_admin.js', array(), NULL, TRUE );
+        wp_enqueue_script( 'pnv_admin_js', PNV_URL . '/js/pnv_admin.js', array(), NULL, TRUE );
     }
 
     /**
@@ -207,7 +214,7 @@ class PNV_Admin {
 
         $default_pointers = array(
             'plugins' => array(
-                'PNV_install' => array(
+                'pnv_install' => array(
                     'target' => '#menu-posts',
                     'content' => '<h3>'. PNV_STR_ACTIVATION_POINTER_TITLE .'</h3> <p>'. PNV_STR_ACTIVATION_POINTER_CONTENT .'</p>',
                     'position' => array( 'edge' => 'top', 'align' => 'top' ),
@@ -218,7 +225,7 @@ class PNV_Admin {
         if( !empty( $default_pointers[$screen_id] ) )
             $pointers = $default_pointers[$screen_id];
 
-        return apply_filters( 'PNV_admin_pointers', $pointers, $screen_id );
+        return apply_filters( 'pnv_admin_pointers', $pointers, $screen_id );
     }
 
     /**

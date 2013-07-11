@@ -1,3 +1,10 @@
 .status-duplicata.inline-edit-row fieldset .inline-edit-status {
     display:none;
 }
+#pnv_submit_meta_box #publishing-action, #pnv_submit_meta_box #delete-action {
+    float:none;
+    text-align:center;
+}
+#pnv_submit_meta_box #major-publishing-actions {
+    margin-top:10px;
+}

@@ -13,7 +13,7 @@ define( 'PNV_STR_OTHER_DUPLICATA_META_BOX_TITLE', __( 'Other pending versions', 
 define( 'PNV_STR_ERASE_BUTTON', __( 'Update original', PNV_DOMAIN ) );
 define( 'PNV_STR_DUPLICATE_BUTTON', _x( 'Prepare new version', 'duplication button', PNV_DOMAIN ) );
 define( 'PNV_STR_COPY_BUTTON', _x( 'Duplicate', 'copy button title on an original', PNV_DOMAIN ) );
-define( 'PNV_STR_ADD_NEW_FROM_BUTTON', _x( 'Add new from', 'copy button title on a duplicate', PNV_DOMAIN ) );
+define( 'PNV_STR_ADD_NEW_FROM_BUTTON', _x( 'Create as new', 'copy button title on a duplicate', PNV_DOMAIN ) );
 define( 'PNV_STR_PUBLISH_META_BOX_TITLE', __( 'Publish', PNV_DOMAIN ) );
 define( 'PNV_STR_SAVE_DUPLICATA_BUTTON', __( 'Save', PNV_DOMAIN ) );
 define( 'PNV_STR_NONE', __( 'None', PNV_DOMAIN ) );

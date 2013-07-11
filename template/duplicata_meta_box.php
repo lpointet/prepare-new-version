@@ -16,10 +16,18 @@ else
         </li>
     <?php endforeach; ?>
 </ul>
-<p>
-    <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_DUPLICATE_ACTION, $action_url ); ?>" id="duplicate" class="button <?php echo !empty( $original ) ? '' : 'button-primary button-large'; ?>"><?php echo PNV_STR_DUPLICATE_BUTTON; ?></a>
+<p id="prepare-actions">
+    <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_DUPLICATE_ACTION, $action_url ); ?>" id="duplicate" class="button <?php echo !empty( $original ) ? '' : 'button-primary button-large'; ?>"><?php echo PNV_STR_DUPLICATE_BUTTON; ?></a><br/>
 
-    <?php if( empty( $original ) ): ?>
-        <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_COPY_ACTION , $action_url ); ?>" id="copy" class="button"><?php echo PNV_STR_COPY_BUTTON; ?></a>
-    <?php endif; ?>
+    <?php
+    if( empty( $original ) ) {
+        $class = ' class="button"';
+        $title = PNV_STR_COPY_BUTTON;
+    }
+    else {
+        $class = '';
+        $title = PNV_STR_ADD_NEW_FROM_BUTTON;
+    }
+    ?>
+    <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_COPY_ACTION , $action_url ); ?>" id="copy"<?php echo $class; ?>><?php echo $title; ?></a>
 </p>

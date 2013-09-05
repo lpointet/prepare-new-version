@@ -285,14 +285,14 @@ class PNV_Admin {
                     if(typeof(jQuery().pointer) != 'undefined') {
                         <?php foreach(self::$current_screen_pointers as $pointer_id => $data): ?>
                             $('<?php echo $data['target'] ?>').pointer({
-                                content: '<?php echo $data['content'] ?>',
+                                content: '<?php echo addslashes( $data['content'] ) ?>',
                                 position: {
-                                    edge: '<?php echo $data['position']['edge'] ?>',
-                                    align: '<?php echo $data['position']['align'] ?>'
+                                    edge: '<?php echo addslashes( $data['position']['edge'] ) ?>',
+                                    align: '<?php echo addslashes( $data['position']['align'] ) ?>'
                                 },
                                 close: function() {
                                     $.post( ajaxurl, {
-                                        pointer: '<?php echo $pointer_id ?>',
+                                        pointer: '<?php echo addslashes( $pointer_id ) ?>',
                                         action: 'dismiss-wp-pointer'
                                     });
                                 }

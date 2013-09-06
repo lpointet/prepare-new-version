@@ -81,12 +81,15 @@ class PNV_Admin {
     /**
      * Add meta box with links to duplicatas
      */
-    public static function add_meta_boxes( $current_post_type, $post ) {
+    public static function add_meta_boxes( $current_post_type, $post = null ) {
         $post_type = PNV_Option::get_post_types();
 
         // Post type not supported: don't do anything
         if( !in_array( $current_post_type, $post_type ) )
             return;
+
+        // Be sure we have a post
+        $post = !empty( $post ) ? $post : get_post();
 
         $title = PNV_STR_DUPLICATA_META_BOX_TITLE;
 

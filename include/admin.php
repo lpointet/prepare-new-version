@@ -38,10 +38,10 @@ class PNV_Admin {
      * Handle duplicata / copy creation
      */
     public static function handle_action() {
-        if( !isset( $_GET[PNV_ACTION_NAME] ) || !isset( $_GET['ID'] ) || !check_admin_referer( PNV_ACTION_NONCE ) )
+        if( !isset( $_GET[PNV_ACTION_NAME] ) || !isset( $_GET['post'] ) || !check_admin_referer( PNV_ACTION_NONCE ) )
             return;
 
-        $source = get_post( $_GET['ID'] );
+        $source = get_post( $_GET['post'] );
         $post_types = PNV_Option::get_post_types();
 
         // Check post type
@@ -58,7 +58,7 @@ class PNV_Admin {
                 $post_id = PNV::erase_content( $source, NULL, $_GET[PNV_ACTION_NAME] );
                 break;
             case PNV_ERASE_ACTION:
-                $destination = get_post( PNV::get_original( $_GET['ID'] ) );
+                $destination = get_post( PNV::get_original( $_GET['post'] ) );
                 $post_id = PNV::erase_content( $source, $destination, $_GET[PNV_ACTION_NAME] );
                 break;
         }

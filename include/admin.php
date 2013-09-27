@@ -48,6 +48,12 @@ class PNV_Admin {
         if( !in_array( $source->post_type, $post_types ) )
             return;
 
+        $post_type_object = get_post_type_object( $source->post_type );
+
+        // Check user rights on that post
+        if( !current_user_can( $post_type_object->cap->edit_post, $source->ID ) )
+            return;
+
         switch( $_GET[PNV_ACTION_NAME] ) {
             case PNV_DUPLICATE_ACTION:
                 $post_id = PNV::erase_content( $source );

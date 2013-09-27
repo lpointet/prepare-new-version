@@ -95,8 +95,8 @@ class PNV_Admin {
 
         // If we are on a duplicata, remove default submit meta box and replace it with our box
         if( PNV::is_duplicata( $post->ID ) ) {
-            remove_meta_box( 'submitdiv', $current_screen->post_type, 'side' );
-            add_meta_box( 'pnv_submit_meta_box', PNV_STR_PUBLISH_META_BOX_TITLE, array( __CLASS__, 'submit_meta_box' ), $current_screen->post_type, 'side', 'core' );
+            remove_meta_box( 'submitdiv', $current_post_type, 'side' );
+            add_meta_box( 'pnv_submit_meta_box', PNV_STR_PUBLISH_META_BOX_TITLE, array( __CLASS__, 'submit_meta_box' ), $current_post_type, 'side', 'core' );
 
             // Replace "duplicates" meta box title
             $title = PNV_STR_OTHER_DUPLICATA_META_BOX_TITLE;
@@ -356,7 +356,7 @@ class PNV_Admin {
             if( $post_type !== $post->post_type )
                 continue;
 
-            $index = count( $messages[$post_type] );
+            $index = !empty( $messages[$post_type] ) ? count( $messages[$post_type] ) : 0;
             $messages[$post_type][$index] = PNV_STR_MESSAGE_DUPLICATE . ' <a href="' . esc_url( add_query_arg( array( 'post' => $original, 'action' => 'edit' ), admin_url( 'post.php' ) ) ) . '">' . get_the_title( $original ) . '</a>';
 
             if( !isset( $_GET['message'] ) )

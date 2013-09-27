@@ -215,7 +215,7 @@ if( !class_exists( 'PNV' ) ) {
                     break;
             }
 
-            $destination = apply_filters( 'PNV_erase_content_destination', $destination, $source, $duplicate );
+            $destination = apply_filters( 'pnv_erase_content_destination', $destination, $source, $action );
 
             $post_id = wp_insert_post( $destination );
 

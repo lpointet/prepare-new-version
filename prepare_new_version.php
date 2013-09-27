@@ -6,7 +6,7 @@
  * Author:              Lionel POINTET, GLOBALIS media systems
  * Author URI:          http://www.globalis-ms.com
  *
- * Version:             1.0.0
+ * Version:             0.9
  * Requires at least:   3.6.0
  * Tested up to:        3.6
  */

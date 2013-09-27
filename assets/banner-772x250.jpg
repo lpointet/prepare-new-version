@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+
+  <head>
+    <title>
+      banner-772x250.jpg in prepare-new-version/assets
+     – WordPress Plugin Repository
+    </title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--[if IE]><script type="text/javascript">
+      if (/^#__msie303:/.test(window.location.hash))
+        window.location.replace(window.location.hash.replace(/^#__msie303:/, '#'));
+    </script><![endif]-->
+        <link rel="search" href="/search" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/export/778231/prepare-new-version/assets/banner-772x250.jpg" type="image/jpeg; charset=utf-8" title="Original Format" />
+        <link rel="up" href="/browser/prepare-new-version/assets/banner-772x250.jpg" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/code.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/browser.css" type="text/css" />
+        <link rel="shortcut icon" href="/chrome/common/trac.ico" type="image/x-icon" />
+        <link rel="icon" href="/chrome/common/trac.ico" type="image/x-icon" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search WordPress Plugin Repository" />
+      <script type="text/javascript" charset="utf-8" src="/chrome/common/js/jquery.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/chrome/common/js/babel.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/chrome/common/js/trac.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/chrome/common/js/search.js"></script>
+    <script type="text/javascript" src="/chrome/common/js/folding.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $(".trac-toggledeleted").show().click(function() {
+                  $(this).siblings().find(".trac-deleted").toggle();
+                  return false;
+        }).click();
+        $("#jumploc input").hide();
+        $("#jumploc select").change(function () {
+          this.parentNode.parentNode.submit();
+        });
+          $('#preview table.code').enableCollapsibleColumns($('#preview table.code thead th.content'));
+      });
+    </script>
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="/"><img src="http://wordpress.org/images/wp-plugins.png" alt="WordPress Plugins" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li class="last"><a href="/about">About Trac</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/browser">Browse Source</a></li><li><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+        <ul>
+          <li class="first"><span class="missing">&larr; Previous Revision</span></li><li><a href="/browser/prepare-new-version/assets/banner-772x250.jpg">Latest Revision</a></li><li><span class="missing">Next Revision &rarr;</span></li><li><a href="/browser/prepare-new-version/assets/banner-772x250.jpg?annotate=blame&amp;rev=778231" title="Annotate each line with the last changed revision (this can be time consuming...)">Blame</a></li><li><a href="/log/prepare-new-version/assets/banner-772x250.jpg?rev=778231">Revision Log</a></li><li class="last"><a href="http://wordpress.org/extend/plugins/prepare-new-version/assets/banner-772x250.jpg">Repository URL</a></li>
+        </ul>
+        <hr />
+      </div>
+    <div id="content" class="browser">
+        <h1>
+          
+<a class="pathentry first" href="/browser?rev=778231&amp;order=name" title="Go to repository root">source:</a>
+<a class="pathentry" href="/browser/prepare-new-version?rev=778231&amp;order=name" title="View prepare-new-version">prepare-new-version</a><span class="pathentry sep">/</span><a class="pathentry" href="/browser/prepare-new-version/assets?rev=778231&amp;order=name" title="View assets">assets</a><span class="pathentry sep">/</span><a class="pathentry" href="/browser/prepare-new-version/assets/banner-772x250.jpg?rev=778231&amp;order=name" title="View banner-772x250.jpg">banner-772x250.jpg</a>
+<span class="pathentry sep">@</span>
+  <a class="pathentry" href="/changeset/778231/" title="View changeset 778231">778231</a>
+<br style="clear: both" />
+
+        </h1>
+        <div id="diffrev">
+          <form action="/changeset" method="get">
+            <div>
+              <label title="Show the diff against a specific revision">
+                View diff against: <input type="text" name="old" size="6" />
+                <input type="hidden" name="old_path" value="prepare-new-version/assets/banner-772x250.jpg" />
+                <input type="hidden" name="new" value="778231" />
+                <input type="hidden" name="new_path" value="prepare-new-version/assets/banner-772x250.jpg" />
+              </label>
+            </div>
+          </form>
+        </div>
+        <div id="jumprev">
+          <form action="" method="get">
+            <div>
+              <label for="rev" title="Hint: clear the field to view latest revision">
+                View revision:</label>
+              <input type="text" id="rev" name="rev" value="778231" size="6" />
+            </div>
+          </form>
+        </div>
+        <div class="trac-tags">
+        </div>
+      <table id="info" summary="Revision info">
+        <tr>
+          <th>
+                <a href="/changeset/778231/prepare-new-version/assets/banner-772x250.jpg" title="View differences">Last change</a>
+                  on this file since 778231 was
+                  <a href="/changeset/778231/" title="View changeset 778231">778231</a>,
+                  checked in by globalis, <a class="timeline" href="/timeline?from=2013-09-25T09%3A57%3A23Z&amp;precision=second" title="See timeline at 09/25/13 09:57:23">2 days ago</a>
+          </th>
+        </tr>
+        <tr>
+          <td class="message searchable">
+              <p>
+Adding assets files<br />
+</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <ul class="props">
+              <li>
+                  Property <strong>svn:mime-type</strong> set to
+                  <em><code>application/octet-stream</code></em>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <tr><td colspan="2">
+            <strong>File size:</strong>
+            <span title="30101 bytes">29.4 KB</span>
+          </td></tr>
+      </table>
+      <div id="preview" class="searchable">
+        
+  <div class="image-file"><img src="/export/778231/prepare-new-version/assets/banner-772x250.jpg" alt="prepare-new-version/assets/banner-772x250.jpg" /></div>
+
+      </div>
+      <div id="anydiff">
+        <form action="/diff" method="get">
+          <div class="buttons">
+            <input type="hidden" name="new_path" value="/prepare-new-version/assets/banner-772x250.jpg" />
+            <input type="hidden" name="old_path" value="/prepare-new-version/assets/banner-772x250.jpg" />
+            <input type="hidden" name="new_rev" value="778231" />
+            <input type="hidden" name="old_rev" value="778231" />
+            <input type="submit" value="View changes..." title="Select paths and revs for Diff" />
+          </div>
+        </form>
+      </div>
+      <div id="help"><strong>Note:</strong> See <a href="/wiki/TracBrowser">TracBrowser</a>
+        for help on using the repository browser.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="last first">
+          <a rel="nofollow" href="/export/778231/prepare-new-version/assets/banner-772x250.jpg">Original Format</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 1.0.1</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">A <a href="http://wordpress.org/">WordPress</a> Production</p>
+    </div>
+  </body>
+</html>

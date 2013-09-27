@@ -278,9 +278,9 @@ if( !class_exists( 'PNV' ) ) {
         /**
          * Return URL where actions have to be sent
          */
-        public static function get_action_url( $post ) {
+        public static function get_action_url( $post, $action = PNV_DUPLICATE_ACTION ) {
             $action_url = add_query_arg( array( 'action' => 'edit', 'post' => $post->ID ), admin_url( '/post.php' ) );
-            $action_url = wp_nonce_url( $action_url, PNV_ACTION_NONCE );
+            $action_url = wp_nonce_url( $action_url, PNV_ACTION_NONCE . '_' . $action . '_' . $post->ID );
 
             return $action_url;
         }

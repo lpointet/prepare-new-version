@@ -38,7 +38,7 @@ class PNV_Admin {
      * Handle duplicata / copy creation
      */
     public static function handle_action() {
-        if( !isset( $_GET[PNV_ACTION_NAME] ) || !isset( $_GET['post'] ) || !check_admin_referer( PNV_ACTION_NONCE ) )
+        if( !isset( $_GET[PNV_ACTION_NAME] ) || !isset( $_GET['post'] ) || !check_admin_referer( PNV_ACTION_NONCE . '_' . $_GET[PNV_ACTION_NAME] . '_' . $_GET['post'] ) )
             return;
 
         $source = get_post( $_GET['post'] );
@@ -111,7 +111,6 @@ class PNV_Admin {
     public static function duplicata_meta_box() {
         $post = get_post();
         $original = PNV::get_original();
-        $action_url = PNV::get_action_url( $post );
 
         require PNV_COMPLETE_PATH . '/template/duplicata_meta_box.php';
     }
@@ -122,7 +121,6 @@ class PNV_Admin {
     public static function submit_meta_box() {
         $post = get_post();
         $original = PNV::get_original();
-        $action_url = PNV::get_action_url( $post );
 
         require PNV_COMPLETE_PATH . '/template/submit_meta_box.php';
     }

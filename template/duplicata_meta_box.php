@@ -17,7 +17,7 @@ else
     <?php endforeach; ?>
 </ul>
 <p id="prepare-actions">
-    <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_DUPLICATE_ACTION, $action_url ); ?>" id="duplicate" class="button <?php echo !empty( $original ) ? '' : 'button-primary button-large'; ?>"><?php echo PNV_STR_DUPLICATE_BUTTON; ?></a><br/>
+    <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_DUPLICATE_ACTION, PNV::get_action_url( $post ) ); ?>" id="duplicate" class="button <?php echo !empty( $original ) ? '' : 'button-primary button-large'; ?>"><?php echo PNV_STR_DUPLICATE_BUTTON; ?></a><br/>
 
     <?php
     if( empty( $original ) ) {
@@ -29,5 +29,5 @@ else
         $title = PNV_STR_ADD_NEW_FROM_BUTTON;
     }
     ?>
-    <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_COPY_ACTION , $action_url ); ?>" id="copy"<?php echo $class; ?>><?php echo $title; ?></a>
+    <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_COPY_ACTION , PNV::get_action_url( $post, PNV_COPY_ACTION ) ); ?>" id="copy"<?php echo $class; ?>><?php echo $title; ?></a>
 </p>

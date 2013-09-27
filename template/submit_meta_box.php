@@ -18,7 +18,7 @@
     <div id="major-publishing-actions">
         <div id="publishing-action">
             <span class="spinner"></span>
-            <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_ERASE_ACTION, $action_url ); ?>" id="erase" class="button button-primary button-large"><?php echo PNV_STR_ERASE_BUTTON; ?></a>
+            <a href="<?php echo add_query_arg( PNV_ACTION_NAME, PNV_ERASE_ACTION, PNV::get_action_url( $post, PNV_ERASE_ACTION ) ); ?>" id="erase" class="button button-primary button-large"><?php echo PNV_STR_ERASE_BUTTON; ?></a>
         </div>
         <div class="clear"></div>
         <div id="delete-action">

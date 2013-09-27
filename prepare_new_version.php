@@ -42,6 +42,9 @@ if( !class_exists( 'PNV' ) ) {
 
             add_action( 'init', array( __CLASS__, 'init' ) );
             add_action( 'delete_post', array( __CLASS__, 'delete_post' ) );
+            add_filter( 'post_type_link', array( __CLASS__, 'post_type_link' ), 10, 4 );
+            add_filter( 'post_link', array( __CLASS__, 'post_link' ), 10, 3 );
+            add_filter( 'page_link', array( __CLASS__, 'page_link' ), 10, 3 );
         }
 
         /**
@@ -283,6 +286,48 @@ if( !class_exists( 'PNV' ) ) {
             $action_url = wp_nonce_url( $action_url, PNV_ACTION_NONCE . '_' . $action . '_' . $post->ID );
 
             return $action_url;
+        }
+
+        /**
+         * Filter Custom Post Types permalinks
+         */
+        public static function post_type_link( $permalink, $post, $leavename, $sample ) {
+            return self::_post_link( $permalink, $post );
+        }
+
+        /**
+         * Filter 'post' type permalinks
+         */
+        public static function post_link( $permalink, $post, $leavename ) {
+            return self::_post_link( $permalink, $post );
+        }
+
+        /**
+         * Filter 'page' type permalinks
+         */
+        public static function page_link( $permalink, $post_id, $sample ) {
+            return self::_post_link( $permalink, get_post( $post_id ) );
+        }
+
+        /**
+         * Filter a permalink and always return a shortlink for a 'duplicata' status:
+         *  - we don't need a permalink for that status
+         *  - a shortlink won't work since WordPress will redirect to permalink because this status is not draft or pending
+         *  - we need a shortlink for the preview
+         */
+        protected static function _post_link( $permalink, $post ) {
+            if( PNV_STATUS_NAME === $post->post_status && in_array( $post->post_type, PNV_Option::get_post_types() ) ) {
+                switch( $post->post_type ) {
+                    case 'page':
+                        $permalink = add_query_arg( array( 'page_id' => $post->ID ), '' );
+                        break;
+                    default:
+                        $permalink = add_query_arg( array( 'post_type' => $post->post_type, 'p' => $post->ID ), '' );
+                }
+                $permalink = home_url( $permalink );
+            }
+
+            return $permalink;
         }
     }
     PNV::hooks();

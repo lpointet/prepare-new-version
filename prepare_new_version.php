@@ -316,7 +316,7 @@ if( !class_exists( 'PNV' ) ) {
          *  - we need a shortlink for the preview
          */
         protected static function _post_link( $permalink, $post ) {
-            if( PNV_STATUS_NAME === $post->post_status && in_array( $post->post_type, PNV_Option::get_post_types() ) ) {
+            if( PNV::is_duplicata( $post ) && in_array( $post->post_type, PNV_Option::get_post_types() ) ) {
                 switch( $post->post_type ) {
                     case 'page':
                         $permalink = add_query_arg( array( 'page_id' => $post->ID ), '' );

@@ -3,7 +3,7 @@ Contributors: GLOBALIS media systems
 Tags: copy, duplication, clone, editing, replacement, workflow, update, anticipate, post, page, version
 Requires at least: 3.5
 Tested up to: 3.6.1
-Stable tag: 0.9
+Stable tag: 0.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,13 @@ When you update an original post, previous pending versions are not deleted and 
 7. In the Posts list, a new column “Pending version” appears in last position.
 
 == Changelog ==
+
+= 0.9.1 =
+* Code refactoring and cleaning
+* Update readme for pnv_erase_content_destination filter
+* Security fix: create a nonce for each action and include post ID in it / props Julio Potier
+* Security fix: check user rights on the post before doing anything with it / props Julio Potier
+* Update permalink for 'duplicata' status posts and always return a shortlink: useful for preview feature / props Julio Potier
 
 = 0.9 =
 initial public version released

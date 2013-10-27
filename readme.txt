@@ -23,7 +23,7 @@ Anticipating and preparing the next version of an article which is already onlin
 
 = Advanced features: =
 * duplication of an article into a brand new independent copy;
-* hookable ;-)
+* hookable ;-) 
 * works with any post types, custom or not
 * makes coffee (we’re still working on that)
 
@@ -43,11 +43,14 @@ If you prefer download Prepare New Version manually :
 
 == Frequently Asked Questions ==
 
-= Which languages are currently supported? =
+= Is the plugin compatible with WordPress 3.7 ? =
+Yes ! ;-)
+
+= Which languages are currently supported? = 
 As of now, Prepare New Version is available in English and in French. If you wish to, you can translate the interface in your own language in the [standard WordPress way] http://codex.wordpress.org/Translating_WordPress
 
 = Do the duplicated posts appear on the front side of my site? =
-No, they won't appear on front since they are meant to be 'draft' versions of contents.
+No, they won't appear on front since they are meant to be 'draft' versions of contents. 
 Only copies will appear since they are real copies and create a real post.
 
 = Is the plugin compatible with all the post types, even the ones I created? =
@@ -100,7 +103,7 @@ initial public version released
 
 == About ==
 
-= Hooks =
+= Hooks = 
 
 **pnv_duplicata_status_args**
 Filter that can be used to alter arguments sent to 'register_post_status'.
@@ -158,7 +161,7 @@ The original version of this plugin has been developed by Lionel POINTET (https:
 
 A big thank-you to [Groupe Moniteur](http://www.groupemoniteur.fr/) for which a great part of this development was intended and which accepted enthusiastically to do a completely open source plugin from it. Thank you to [Uncategorized Creations](http://uncategorized-creations.com/) people, for their regular advice and their perseverance in making WordPress a leading CMS.
 
-= GLOBALIS =
+= GLOBALIS = 
 
 [GLOBALIS](http://www.globalis-ms.com/) is a web IT consulting company based in Paris, and a pioneer of the PHP and LAMP platform. Since 1997, we have been designing, making and maintaining Internet, intranet or mobile software. We have been working with open source CMS since 2000 and have regularly been using WordPress since 2007.
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:         Prepare New Version
- * Plugin URI:          http://www.globalis-ms.com/
+ * Plugin URI:          http://wordpress.org/plugins/prepare-new-version/
  * Description:         Allow creating post 'duplicates' to prepare new versions of one content
  * Author:              Lionel POINTET, GLOBALIS media systems
  * Author URI:          http://www.globalis-ms.com

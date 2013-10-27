@@ -138,6 +138,11 @@ class PNV_Admin {
         global $wp_list_table;
 
         $current_screen = get_current_screen();
+
+        // get_current_screen() could return null (in AJAX context for ex, when quick editing a post)
+        if( !$current_screen )
+            return $columns;
+
         $post_type_obj = get_post_type_object( $current_screen->post_type );
 
         // If we cannot create posts of that type, we cannot see duplicatas

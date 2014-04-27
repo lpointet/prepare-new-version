@@ -131,7 +131,7 @@ Default arguments are:
 
 **pnv_erase_content_destination**
 Filter that can be used to alter $destination array before 'wp_insert_post' get called when a copy, duplication or replacement is triggered
-This filter sends 3 other parameters: the $source object (WP_Post instance) and the $copy boolean
+This filter sends 3 other parameters: the $destination post array, the $source object (WP_Post instance) and the $action string
 
 **pnv_filtered_metas**
 Filter that can be used to alter meta names that must not be treated while a post is copied, duplicated or replaced

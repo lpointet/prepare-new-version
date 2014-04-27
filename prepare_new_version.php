@@ -6,9 +6,9 @@
  * Author:              Lionel POINTET, GLOBALIS media systems
  * Author URI:          http://www.globalis-ms.com
  *
- * Version:             0.9.1
+ * Version:             0.9.2
  * Requires at least:   3.6.0
- * Tested up to:        3.6
+ * Tested up to:        3.9
  */
 
 if( !class_exists( 'PNV' ) ) {

@@ -211,10 +211,10 @@ if( !class_exists( 'PNV' ) ) {
             // We may prepend some string to the post title
             switch( $action ) {
                 case PNV_DUPLICATE_ACTION:
-                    $destination['post_title'] = PNV_STR_DUPLICATE_PREPEND_TITLE . ' ' . $destination['post_title'];
+                    $destination['post_title'] = trim(apply_filters('pnv_duplicate_prepend_title',PNV_STR_DUPLICATE_PREPEND_TITLE).' '. $destination['post_title']);
                     break;
                 case PNV_COPY_ACTION:
-                    $destination['post_title'] = PNV_STR_COPY_PREPEND_TITLE . ' ' . $destination['post_title'];
+                    $destination['post_title'] = trim(apply_filters('pnv_copy_prepend_title',PNV_STR_COPY_PREPEND_TITLE) .' ' . $destination['post_title']);
                     break;
             }
 
